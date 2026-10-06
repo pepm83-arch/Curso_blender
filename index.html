@@ -5,407 +5,238 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Guía Didáctica: Animación Artesanal y 3D (Stop Motion + Blender)</title>
   <style>
-    :root {
-      --primary: #0969da;
-      --primary-hover: #074796;
-      --bg-page: #f8fafc;
-      --card-bg: #ffffff;
-      --text: #1e293b;
-      --text-muted: #64748b;
-      --border: #e2e8f0;
-      --accent: #8b5cf6;
-      --success: #10b981;
-      --warning: #f59e0b;
-      --danger: #ef4444;
-    }
+  
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+:root {
+  --primary: #0969da;
+  --primary-hover: #074796;
+  --bg-page: #f8fafc;
+  --card-bg: #ffffff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --border: #e2e8f0;
+  --accent: #8b5cf6;
+}
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background-color: var(--bg-page);
-      color: var(--text);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
+* { box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: var(--text);
+  line-height: 1.6;
+}
 
-    /* BLOQUEO POR CONTRASEÑA */
-    #content-wrapper {
-      display: none;
-    }
+/* Títulos y Jerarquía */
+h1 { color: #0969da; font-size: 2.1rem; margin-top: 0; font-weight: 800; }
+h2 { color: #0f172a; font-size: 1.5rem; margin-top: 2rem; margin-bottom: 0.8rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.4rem; }
+h3 { color: #1e293b; font-size: 1.2rem; margin-top: 1.4rem; margin-bottom: 0.5rem; }
+h4 { color: #475569; font-size: 1rem; margin-top: 1.1rem; margin-bottom: 0.4rem; }
 
-    #content-wrapper.unlocked {
-      display: block;
-    }
+p { margin-bottom: 0.9rem; }
+ul, ol { margin: 0.6rem 0 1rem 1.4rem; }
+li { margin-bottom: 0.35rem; }
 
-    /* MODAL DE CLAVE */
-    #access-modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: radial-gradient(circle at center, rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.98));
-      backdrop-filter: blur(8px);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 99999;
-      padding: 1.5rem;
-    }
+/* Tablas */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.25rem 0;
+  font-size: 0.88rem;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+th, td {
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+th {
+  background-color: #f1f5f9;
+  font-weight: 600;
+  color: #0f172a;
+}
+tr:nth-child(even) { background-color: #f8fafc; }
 
-    .modal-box {
-      background: #ffffff;
-      max-width: 440px;
-      width: 100%;
-      border-radius: 20px;
-      padding: 2.5rem 2rem;
-      text-align: center;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
-      border: 1px solid rgba(226, 232, 240, 0.8);
-      animation: modalPop 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    }
+/* Callouts y Citas */
+blockquote {
+  margin: 1.2rem 0;
+  padding: 0.85rem 1.2rem;
+  color: #334155;
+  border-left: 4px solid var(--primary);
+  background: #eff6ff;
+  border-radius: 0 8px 8px 0;
+}
+.callout {
+  padding: 1rem 1.3rem;
+  border-radius: 10px;
+  margin: 1.2rem 0;
+  border-left: 5px solid;
+}
+.callout-info {
+  background: #f0f9ff;
+  border-color: #0284c7;
+  color: #0c4a6e;
+}
+.callout-alert {
+  background: #fffbeb;
+  border-color: #f59e0b;
+  color: #78350f;
+}
 
-    @keyframes modalPop {
-      0% { transform: scale(0.9) translateY(20px); opacity: 0; }
-      100% { transform: scale(1) translateY(0); opacity: 1; }
-    }
+/* Bloques de código / pre */
+pre {
+  background: #f1f5f9;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-family: Consolas, monospace;
+  font-size: 0.84rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+code {
+  font-family: Consolas, monospace;
+  background: #f1f5f9;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.88em;
+}
 
-    .modal-icon-badge {
-      width: 68px;
-      height: 68px;
-      margin: 0 auto 1.25rem;
-      border-radius: 50%;
-      background: #eff6ff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 0 6px #dbeafe;
-    }
+/* Diagramas Vectoriales */
+.vector-diagram-container {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 1.25rem;
+  margin: 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.vector-diagram-container svg {
+  max-width: 100%;
+  height: auto;
+}
+.diagram-caption {
+  margin-top: 0.6rem;
+  font-size: 0.84rem;
+  color: #64748b;
+  font-weight: 500;
+}
 
-    .modal-box h2 {
-      font-size: 1.45rem;
-      color: #0f172a;
-      margin-bottom: 0.5rem;
-      font-weight: 700;
-    }
+body {
+  background: var(--bg-page);
+  margin: 0;
+  padding: 0;
+}
 
-    .modal-box p {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      margin-bottom: 1.75rem;
-    }
+/* Modal de Acceso */
+#content-wrapper { display: none; }
+#content-wrapper.unlocked { display: block; }
 
-    .code-input-group {
-      position: relative;
-      margin-bottom: 1rem;
-    }
+#access-modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: radial-gradient(circle at center, rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.98));
+  backdrop-filter: blur(8px);
+  display: flex; justify-content: center; align-items: center;
+  z-index: 99999;
+  padding: 1.5rem;
+}
+.modal-box {
+  background: #ffffff;
+  max-width: 440px; width: 100%;
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  animation: modalPop 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes modalPop {
+  0% { transform: scale(0.9) translateY(20px); opacity: 0; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+.modal-icon-badge {
+  width: 68px; height: 68px;
+  margin: 0 auto 1.25rem;
+  border-radius: 50%;
+  background: #eff6ff;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 0 6px #dbeafe;
+}
+.code-input {
+  width: 100%; padding: 0.95rem 1.25rem;
+  font-size: 1.15rem; letter-spacing: 0.25em;
+  text-align: center;
+  border: 2px solid var(--border); border-radius: 12px;
+  outline: none; margin-bottom: 0.8rem;
+  background: #f8fafc;
+}
+.code-input:focus {
+  border-color: var(--primary); background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(9, 105, 218, 0.15);
+}
+.modal-btn {
+  width: 100%; padding: 0.95rem; font-size: 1rem; font-weight: 600;
+  color: #ffffff; background: linear-gradient(135deg, var(--primary), #2563eb);
+  border: none; border-radius: 12px; cursor: pointer;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+}
+.error-msg { display: none; color: #ef4444; font-size: 0.88rem; margin-bottom: 0.75rem; }
+.hint-chip {
+  display: inline-block; margin-top: 1.25rem; font-size: 0.78rem;
+  color: #64748b; background: #f1f5f9; padding: 4px 10px; border-radius: 20px;
+}
 
-    .code-input {
-      width: 100%;
-      padding: 1rem 1.25rem;
-      font-size: 1.15rem;
-      letter-spacing: 0.25em;
-      text-align: center;
-      border: 2px solid var(--border);
-      border-radius: 12px;
-      outline: none;
-      transition: all 0.2s ease;
-      font-weight: 600;
-      color: #0f172a;
-      background: #f8fafc;
-    }
+/* Cabecera Web */
+.hero-header {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: #ffffff;
+  padding: 3.5rem 1.5rem;
+  text-align: center;
+  border-bottom: 4px solid var(--primary);
+}
+.hero-badge {
+  display: inline-block; background: rgba(9, 105, 218, 0.25);
+  border: 1px solid rgba(96, 165, 250, 0.4); color: #93c5fd;
+  padding: 0.35rem 0.9rem; border-radius: 9999px; font-size: 0.85rem;
+  font-weight: 600; margin-bottom: 1rem; text-transform: uppercase;
+}
+.hero-header h1 { font-size: 2.3rem; margin-bottom: 0.5rem; color: #ffffff; }
+.hero-subtitle { font-size: 1.15rem; color: #cbd5e1; max-width: 750px; margin: 0 auto; }
 
-    .code-input:focus {
-      border-color: var(--primary);
-      background: #ffffff;
-      box-shadow: 0 0 0 4px rgba(9, 105, 218, 0.15);
-    }
+/* Contenedor principal */
+.container {
+  max-width: 1060px;
+  margin: -2rem auto 4rem;
+  padding: 0 1.5rem;
+}
+.card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 2.5rem;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+}
+.download-bar {
+  background: linear-gradient(135deg, #eff6ff, #dbeafe);
+  border: 1px solid #bfdbfe; border-radius: 14px;
+  padding: 1.25rem 1.75rem;
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 2rem;
+}
+.download-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--primary); color: #ffffff;
+  padding: 0.65rem 1.25rem; border-radius: 10px;
+  text-decoration: none; font-weight: 600; font-size: 0.9rem;
+}
 
-    .modal-btn {
-      width: 100%;
-      padding: 0.95rem 1.5rem;
-      font-size: 1rem;
-      font-weight: 600;
-      color: #ffffff;
-      background: linear-gradient(135deg, var(--primary), #2563eb);
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
-    }
-
-    .modal-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
-    }
-
-    .error-msg {
-      display: none;
-      color: var(--danger);
-      font-size: 0.88rem;
-      margin-top: 0.75rem;
-      font-weight: 500;
-    }
-
-    .hint-chip {
-      display: inline-block;
-      margin-top: 1.25rem;
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      background: #f1f5f9;
-      padding: 4px 10px;
-      border-radius: 20px;
-    }
-
-    /* ESTILOS DE LA GUÍA DIDÁCTICA */
-    .hero-header {
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-      color: #ffffff;
-      padding: 3.5rem 1.5rem;
-      text-align: center;
-      border-bottom: 4px solid var(--primary);
-    }
-
-    .hero-badge {
-      display: inline-block;
-      background: rgba(9, 105, 218, 0.25);
-      border: 1px solid rgba(96, 165, 250, 0.4);
-      color: #93c5fd;
-      padding: 0.35rem 0.9rem;
-      border-radius: 9999px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .hero-header h1 {
-      font-size: 2.3rem;
-      font-weight: 800;
-      line-height: 1.2;
-      margin-bottom: 0.75rem;
-      color: #ffffff;
-    }
-
-    .hero-subtitle {
-      font-size: 1.15rem;
-      color: #cbd5e1;
-      max-width: 750px;
-      margin: 0 auto 1.5rem;
-    }
-
-    .container {
-      max-width: 1040px;
-      margin: -2rem auto 4rem;
-      padding: 0 1.5rem;
-    }
-
-    .card {
-      background: var(--card-bg);
-      border-radius: 16px;
-      padding: 2.25rem;
-      margin-bottom: 2rem;
-      border: 1px solid var(--border);
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-    }
-
-    .section-title {
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: #0f172a;
-      display: flex;
-      align-items: center;
-      gap: 0.65rem;
-      margin-bottom: 1.25rem;
-      padding-bottom: 0.75rem;
-      border-bottom: 2px solid #f1f5f9;
-    }
-
-    .callout {
-      padding: 1.25rem 1.5rem;
-      border-radius: 12px;
-      margin: 1.5rem 0;
-      display: flex;
-      gap: 1rem;
-      align-items: flex-start;
-      border-left: 5px solid;
-    }
-
-    .callout-info {
-      background: #f0f9ff;
-      border-color: #0284c7;
-      color: #0c4a6e;
-    }
-
-    .callout-alert {
-      background: #fffbeb;
-      border-color: #f59e0b;
-      color: #78350f;
-    }
-
-    /* DIAGRAMAS VECTORIALES SVG */
-    .vector-diagram-container {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 14px;
-      padding: 1.5rem;
-      margin: 1.5rem 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
-    }
-
-    .vector-diagram-container svg {
-      max-width: 100%;
-      height: auto;
-    }
-
-    .diagram-caption {
-      margin-top: 0.75rem;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      font-weight: 500;
-    }
-
-    /* GRID DE PUPPETS */
-    .puppets-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.75rem;
-      margin-top: 1.5rem;
-    }
-
-    .puppet-card {
-      background: #ffffff;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      overflow: hidden;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .puppet-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    }
-
-    .puppet-illustration {
-      background: linear-gradient(180deg, #f1f5f9 0%, #e2e8f0 100%);
-      padding: 1.75rem 1rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 200px;
-    }
-
-    .puppet-content {
-      padding: 1.5rem;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .puppet-tag {
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      padding: 3px 8px;
-      border-radius: 6px;
-      display: inline-block;
-      margin-bottom: 0.65rem;
-    }
-
-    .tag-easy { background: #dcfce7; color: #15803d; }
-    .tag-medium { background: #fef3c7; color: #b45309; }
-
-    .step-list {
-      margin: 1rem 0;
-      padding-left: 1.25rem;
-      font-size: 0.92rem;
-      color: #334155;
-    }
-
-    .step-list li {
-      margin-bottom: 0.5rem;
-    }
-
-    /* TABLAS ESTILIZADAS */
-    .table-container {
-      overflow-x: auto;
-      margin: 1.5rem 0;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      text-align: left;
-      font-size: 0.92rem;
-    }
-
-    th {
-      background: #f8fafc;
-      padding: 0.85rem 1rem;
-      font-weight: 600;
-      color: #0f172a;
-      border-bottom: 1px solid var(--border);
-    }
-
-    td {
-      padding: 0.85rem 1rem;
-      border-bottom: 1px solid var(--border);
-      color: #334155;
-    }
-
-    tr:last-child td {
-      border-bottom: none;
-    }
-
-    tr:hover td {
-      background: #f8fafc;
-    }
-
-    /* DESCARGAS */
-    .download-bar {
-      background: linear-gradient(135deg, #eff6ff, #dbeafe);
-      border: 1px solid #bfdbfe;
-      border-radius: 14px;
-      padding: 1.25rem 1.75rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: gap;
-      margin-top: 1rem;
-    }
-
-    .download-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: var(--primary);
-      color: #ffffff;
-      padding: 0.65rem 1.25rem;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.9rem;
-      transition: background 0.2s;
-    }
-
-    .download-btn:hover {
-      background: var(--primary-hover);
-    }
   </style>
 </head>
 <body>
@@ -419,20 +250,18 @@
           <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
         </svg>
       </div>
-      <h2>Contenido Protegido</h2>
-      <p>Introduce la clave de acceso docente o de aula para consultar la guía didáctica interactiva.</p>
+      <h2 style="font-size:1.45rem; color:#0f172a; margin-bottom:0.5rem; font-weight:700;">Contenido Protegido</h2>
+      <p style="color:#64748b; font-size:0.95rem; margin-bottom:1.5rem;">Introduce la clave de acceso de aula para consultar la guía didáctica interactiva completa.</p>
       
-      <div class="code-input-group">
-        <input type="password" id="access-code-input" class="code-input" placeholder="••••••••" autofocus autocomplete="off">
-        <div id="access-error" class="error-msg">⚠️ Código incorrecto. Inténtalo de nuevo.</div>
-      </div>
+      <input type="password" id="access-code-input" class="code-input" placeholder="••••••••" autofocus autocomplete="off">
+      <div id="access-error" class="error-msg">⚠️ Código incorrecto. Inténtalo de nuevo.</div>
       
-      <button id="unlock-btn" class="modal-btn">Desbloquear Guía</button>
+      <button id="unlock-btn" class="modal-btn">Desbloquear Guía Completa</button>
       <div class="hint-chip">💡 Clave por defecto para el centro: <strong>blender2026</strong> o <strong>animacion</strong></div>
     </div>
   </div>
 
-  <!-- CONTENIDO PRINCIPAL -->
+  <!-- CONTENIDO PRINCIPAL COMPLETO -->
   <div id="content-wrapper">
     <header class="hero-header">
       <span class="hero-badge">34 Sesiones · 10 a 14 Años · Bajo Coste</span>
@@ -441,278 +270,653 @@
     </header>
 
     <main class="container">
-      
-      <!-- DESCARGA DEL PDF -->
+      <br>
       <div class="download-bar">
         <div>
-          <h3 style="font-size:1.05rem; color:#1e3a8a; margin-bottom:2px;">📄 Documento Oficial Completo en PDF</h3>
-          <p style="font-size:0.88rem; color:#3b82f6;">Edición maquetada de 14 páginas lista para imprimir o compartir.</p>
+          <h3 style="font-size:1.05rem; color:#1e3a8a; margin:0 0 2px 0;">📄 Descargar Documento Oficial en PDF</h3>
+          <p style="font-size:0.88rem; color:#3b82f6; margin:0;">Versión de 14 páginas con gráficos vectoriales para imprimir.</p>
         </div>
         <a href="Guia_Didactica_Animacion_StopMotion_Blender.pdf" class="download-btn" download>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
           Descargar PDF
         </a>
       </div>
-      <br>
 
-      <!-- SECCIÓN 1: VECTORES DEL FLUJO DIDÁCTICO -->
-      <section class="card">
-        <h2 class="section-title">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-          Flujo de Aprendizaje: De lo Físico a lo Digital
-        </h2>
-        <p>El proyecto combina la motricidad física del trabajo artesanal con la alfabetización en tres dimensiones:</p>
+      <div class="card">
+        <h1 id="guia-didactica-animacion-artesanal-y-3d">🎬 Guía Didáctica: Animación Artesanal y 3D</h1>
+<h2 id="stop-motion-blender"><em>Stop Motion + Blender</em></h2>
+<blockquote>
+<p><strong>Proyecto educativo para alumnado de 10 a 14 años en centros con recursos limitados</strong><br />
+<strong>Duración:</strong> 34 sesiones lectivas de 50 minutos<br />
+<strong>Modalidad de trabajo:</strong> Stop Motion en grupos cooperativos + Blender individual + Proyecto final híbrido</p>
+</blockquote>
+<hr />
+<h3 id="idea-central-del-proyecto">💡 Idea Central del Proyecto</h3>
+<div class="vector-diagram-container">
+  <svg viewBox="0 0 850 180" width="100%" height="180" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#3b82f6" />
+        <stop offset="100%" stop-color="#1d4ed8" />
+      </linearGradient>
+      <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#8b5cf6" />
+        <stop offset="100%" stop-color="#6d28d9" />
+      </linearGradient>
+      <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#10b981" />
+        <stop offset="100%" stop-color="#047857" />
+      </linearGradient>
+      <filter id="shadow" x="-5%" y="-5%" width="115%" height="115%">
+        <feDropShadow dx="0" dy="4" stdDeviation="4" flood-opacity="0.1"/>
+      </filter>
+    </defs>
 
-        <!-- DIAGRAMA VECTORIAL SVG 1: PIPELINE GENERAL -->
-        <div class="vector-diagram-container">
-          <svg viewBox="0 0 850 180" width="100%" height="180" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#3b82f6" />
-                <stop offset="100%" stop-color="#1d4ed8" />
-              </linearGradient>
-              <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#8b5cf6" />
-                <stop offset="100%" stop-color="#6d28d9" />
-              </linearGradient>
-              <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#10b981" />
-                <stop offset="100%" stop-color="#047857" />
-              </linearGradient>
-              <filter id="shadow" x="-5%" y="-5%" width="115%" height="115%">
-                <feDropShadow dx="0" dy="4" stdDeviation="4" flood-opacity="0.1"/>
-              </filter>
-            </defs>
+    <!-- NODO 1: STOP MOTION -->
+    <g filter="url(#shadow)">
+      <rect x="20" y="30" width="220" height="110" rx="14" fill="#ffffff" stroke="#bfdbfe" stroke-width="2"/>
+      <rect x="20" y="30" width="220" height="8" rx="4" fill="url(#grad1)"/>
+      <circle cx="55" cy="70" r="18" fill="#eff6ff"/>
+      <text x="55" y="76" font-size="18" text-anchor="middle">📦</text>
+      <text x="85" y="66" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="700" fill="#0f172a">Fase 1: Stop Motion</text>
+      <text x="85" y="85" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#64748b">Grupos de 3-4 (11 Ses.)</text>
+      <text x="35" y="115" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#334155">Puppets reciclados + Rodaje</text>
+    </g>
 
-            <!-- NODO 1: FÍSICO -->
-            <g filter="url(#shadow)">
-              <rect x="20" y="30" width="220" height="110" rx="14" fill="#ffffff" stroke="#bfdbfe" stroke-width="2"/>
-              <rect x="20" y="30" width="220" height="8" rx="4" fill="url(#grad1)"/>
-              <circle cx="55" cy="70" r="18" fill="#eff6ff"/>
-              <text x="55" y="76" font-size="18" text-anchor="middle">📦</text>
-              <text x="85" y="66" font-family="sans-serif" font-size="14" font-weight="700" fill="#0f172a">Fase 1: Stop Motion</text>
-              <text x="85" y="85" font-family="sans-serif" font-size="11" fill="#64748b">Grupos de 3-4 (11 Ses.)</text>
-              <text x="35" y="115" font-family="sans-serif" font-size="11" fill="#334155">Puppets reciclados + Rodaje</text>
-            </g>
+    <!-- FLECHA 1 -->
+    <path d="M 250 85 L 300 85" stroke="#94a3b8" stroke-width="3" stroke-dasharray="6,6"/>
+    <polygon points="300,80 310,85 300,90" fill="#94a3b8"/>
 
-            <!-- FLECHA 1 -->
-            <path d="M 250 85 L 300 85" stroke="#94a3b8" stroke-width="3" stroke-dasharray="6,6"/>
-            <polygon points="300,80 310,85 300,90" fill="#94a3b8"/>
+    <!-- NODO 2: BLENDER -->
+    <g filter="url(#shadow)">
+      <rect x="315" y="30" width="220" height="110" rx="14" fill="#ffffff" stroke="#ddd6fe" stroke-width="2"/>
+      <rect x="315" y="30" width="220" height="8" rx="4" fill="url(#grad2)"/>
+      <circle cx="350" cy="70" r="18" fill="#f5f3ff"/>
+      <text x="350" y="76" font-size="18" text-anchor="middle">💻</text>
+      <text x="380" y="66" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="700" fill="#0f172a">Fase 2: Blender 3D</text>
+      <text x="380" y="85" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#64748b">Individual (14 Sesiones)</text>
+      <text x="330" y="115" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#334155">Primitivas + Keyframes</text>
+    </g>
 
-            <!-- NODO 2: BLENDER -->
-            <g filter="url(#shadow)">
-              <rect x="315" y="30" width="220" height="110" rx="14" fill="#ffffff" stroke="#ddd6fe" stroke-width="2"/>
-              <rect x="315" y="30" width="220" height="8" rx="4" fill="url(#grad2)"/>
-              <circle cx="350" cy="70" r="18" fill="#f5f3ff"/>
-              <text x="350" y="76" font-size="18" text-anchor="middle">💻</text>
-              <text x="380" y="66" font-family="sans-serif" font-size="14" font-weight="700" fill="#0f172a">Fase 2: Blender 3D</text>
-              <text x="380" y="85" font-family="sans-serif" font-size="11" fill="#64748b">Individual (14 Sesiones)</text>
-              <text x="330" y="115" font-family="sans-serif" font-size="11" fill="#334155">Primitivas + Keyframes</text>
-            </g>
+    <!-- FLECHA 2 -->
+    <path d="M 545 85 L 595 85" stroke="#94a3b8" stroke-width="3" stroke-dasharray="6,6"/>
+    <polygon points="595,80 605,85 595,90" fill="#94a3b8"/>
 
-            <!-- FLECHA 2 -->
-            <path d="M 545 85 L 595 85" stroke="#94a3b8" stroke-width="3" stroke-dasharray="6,6"/>
-            <polygon points="595,80 605,85 595,90" fill="#94a3b8"/>
+    <!-- NODO 3: HÍBRIDO -->
+    <g filter="url(#shadow)">
+      <rect x="610" y="30" width="220" height="110" rx="14" fill="#ffffff" stroke="#a7f3d0" stroke-width="2"/>
+      <rect x="610" y="30" width="220" height="8" rx="4" fill="url(#grad3)"/>
+      <circle cx="645" cy="70" r="18" fill="#ecfdf5"/>
+      <text x="645" y="76" font-size="18" text-anchor="middle">🎬</text>
+      <text x="675" y="66" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="700" fill="#0f172a">Fase 3: Corto Mixto</text>
+      <text x="675" y="85" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#64748b">Mixto (9 Sesiones)</text>
+      <text x="625" y="115" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#334155">Transición + Mini Festival</text>
+    </g>
+  </svg>
+  <div class="diagram-caption">Esquema metodológico: Progresión didáctica de lo tangible a lo digital (34 sesiones)</div>
+</div>
+<blockquote>
+<p>El alumnado diseña y construye un personaje con materiales reciclados de bajo coste, lo anima fotograma a fotograma en stop motion, lo traslada e interpreta como un modelo 3D estilizado en Blender y, finalmente, crea un microcorto híbrido que conecta el mundo tangible con el universo digital.</p>
+</blockquote>
+<hr />
+<h2 id="indice-de-contenidos">📑 Índice de Contenidos</h2>
+<ol>
+<li><a href="#1-planteamiento-general-del-proyecto">Planteamiento general del proyecto</a></li>
+<li><a href="#2-metodología-y-organización-del-aula">Metodología y organización del aula</a></li>
+<li><a href="#3-materiales-generales-y-requisitos-técnicos">Materiales generales y requisitos técnicos</a></li>
+<li><a href="#4-guía-práctica-de-construcción-de-puppets-paso-a-paso-para-alumnado">🛠️ Guía Práctica de Construcción de Puppets (Paso a Paso para Alumnado)</a></li>
+<li><a href="#5-terminología-clave-explicada">Terminología clave explicada</a></li>
+<li><a href="#6-programación-completa-de-sesiones">Programación completa de sesiones (1 a 34)</a></li>
+<li><a href="#7-evaluación-inclusión-y-seguridad">Evaluación, inclusión y seguridad</a></li>
+<li><a href="#8-anexo-programación-para-centros-educativos">Anexo: Programación curricular LOMLOE para centros</a></li>
+<li><a href="#9-referencias-consultadas">Referencias y recursos</a></li>
+</ol>
+<hr />
+<h2 id="1-planteamiento-general-del-proyecto">1. Planteamiento General del Proyecto</h2>
+<p>Esta guía articula una experiencia didáctica para estudiantes de <strong>10 a 14 años</strong> (5.º/6.º de Primaria y 1.º/2.º de ESO) combinando la calidez del trabajo manual con la alfabetización digital en 3D. </p>
+<p>Está específicamente optimizada para <strong>aulas con equipamiento estándar o limitado</strong>, descartando aditamentos costosos (<em>armatures</em> articuladas de metal, fijaciones mecánicas <em>tie-downs</em> o <em>rigs</em> de suspensión).</p>
+<h3 id="objetivos-de-aprendizaje">🎯 Objetivos de Aprendizaje</h3>
+<ul>
+<li><strong>Comprender la ilusión del movimiento</strong> mediante la manipulación directa fotograma a fotograma.</li>
+<li><strong>Resolver problemas estructurales</strong> (centro de gravedad, estabilidad y peso) con materiales de reciclaje.</li>
+<li><strong>Aprender Blender sin frustración</strong>, trabajando de forma individual mediante figuras geométricas elementales (<em>primitivas</em>).</li>
+<li><strong>Fomentar el trabajo en equipo y la coeducación</strong>, repartiendo responsabilidades équitativas en el set de rodaje.</li>
+</ul>
+<h3 id="estructura-de-bloques-y-temporalizacion">📊 Estructura de Bloques y Temporalización</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Bloque</th>
+<th style="text-align: left;">Eje Temático</th>
+<th style="text-align: center;">Dinámica</th>
+<th style="text-align: center;">Sesiones (50')</th>
+<th style="text-align: left;">Producto Entregable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Bloque 1</strong></td>
+<td style="text-align: left;">Stop Motion artesanal con marionetas recicladas</td>
+<td style="text-align: center;">Grupos de 3-4</td>
+<td style="text-align: center;"><strong>11</strong></td>
+<td style="text-align: left;">Microcorto físico (10-15 s)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Bloque 2</strong></td>
+<td style="text-align: left;">Iniciación a Blender: formas, materiales, luces y <em>keyframes</em></td>
+<td style="text-align: center;">Individual</td>
+<td style="text-align: center;"><strong>14</strong></td>
+<td style="text-align: left;">Clip de personaje 3D animado (5-10 s)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Bloque 3</strong></td>
+<td style="text-align: left;">Proyecto final híbrido (Físico + Digital)</td>
+<td style="text-align: center;">Mixto</td>
+<td style="text-align: center;"><strong>9</strong></td>
+<td style="text-align: left;">Cortometraje mixto con transición narrativa</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>TOTAL</strong></td>
+<td style="text-align: left;"><strong>Curso Completo</strong></td>
+<td style="text-align: center;"><strong>Combinada</strong></td>
+<td style="text-align: center;"><strong>34</strong></td>
+<td style="text-align: left;"><strong>Mini-festival y exposición final</strong></td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-info">> **Criterio metodológico clave:**  
+> * **Stop Motion en grupos:** Requiere sincronía de roles (manipulador, fotógrafo/a, claqueta/continuidad e iluminación).  
+> * **Blender individual:** La motricidad fina digital y la orientación tridimensional se asimilan operando directamente el ratón y la interfaz. Cada estudiante debe tener su propio archivo `.blend`.
+</div>
+<hr />
+<h2 id="2-metodologia-y-organizacion-del-aula">2. Metodología y Organización del Aula</h2>
+<pre><code class="language-mermaid">flowchart LR
+    A[Boceto &amp; Lluvia de ideas] --&gt; B[Taller Manual: Construcción]
+    B --&gt; C[Set de Rodaje: Stop Motion]
+    C --&gt; D[Aula Informática: Modelado 3D]
+    D --&gt; E[Animación Keyframe en Blender]
+    E --&gt; F[Unión &amp; Mini-Festival]
+</code></pre>
+<h3 id="roles-en-el-equipo-de-rodaje-rotativos">🤝 Roles en el Equipo de Rodaje (Rotativos)</h3>
+<p>Para garantizar la implicación de todo el alumnado durante el Bloque 1 y 3:
+1. <strong>Dirección y Continuidad:</strong> Comprueba que la acción siga el <em>storyboard</em>, que la iluminación no varíe y que no entren sombras ajenas en encuadre.
+2. <strong>Animación (Manipulador/a):</strong> Efectúa microdesplazamientos del puppet entre toma y toma.
+3. <strong>Cámara y Disparo:</strong> Mantiene firme el dispositivo, vigila el visor y pulsa el disparador sin mover el soporte.
+4. <strong>Arte y Efectos (Foley):</strong> Diseña elementos del escenario y graba sonidos de apoyo (crujidos, palmadas, chasquidos).</p>
+<hr />
+<h2 id="3-materiales-generales-y-requisitos-tecnicos">3. Materiales Generales y Requisitos Técnicos</h2>
+<h3 id="taller-de-stop-motion-coste-cero-reciclaje">📦 Taller de Stop Motion (Coste Cero / Reciclaje)</h3>
+<ul>
+<li><strong>Cuerpo y estructuras:</strong> Cajas de medicamentos o zapatos, envases de yogur, rollos de cartón, hueveras, papel de periódico.</li>
+<li><strong>Masa y anclaje:</strong> Plastilina escolar (sirve de peso y unión), papel de aluminio (núcleo ligero para ahorrar plastilina).</li>
+<li><strong>Uniones y corte:</strong> Cinta de carrocero (fácil de retirar), pegamento de barra, cola blanca, tijeras de punta redonda.</li>
+<li><strong>Captura:</strong> Dispositivos móviles, tabletas o webcams con apps gratuitas (p. ej., <em>Stop Motion Studio</em> con función <em>onion skin</em>).</li>
+<li><strong>Fijación de cámara:</strong> Trípodes escolares o torres improvisadas de libros/cajas firmemente encintadas.</li>
+<li><strong>Iluminación:</strong> Flexos de estudio o luz fija de aula (cerrar persianas para evitar variaciones de luz solar).</li>
+</ul>
+<h3 id="taller-de-blender-aula-de-informatica">🖥️ Taller de Blender (Aula de Informática)</h3>
+<ul>
+<li><strong>Software:</strong> Blender (versión LTS 3.3, 3.6 o 4.x), gratuito y de código abierto.</li>
+<li><strong>Periféricos indispensables:</strong> <strong>Ratón con rueda central (scroll/botón central).</strong> El manejo 3D mediante <em>touchpad</em> genera frustración y ralentiza la clase.</li>
+<li><strong>Optimización en equipos modestos:</strong> Trabajar en modo <em>Solid</em> o <em>Material Preview</em>; resolución de salida a 720p (1280x720) o utilizar <em>Viewport Render Animation</em> para exportar al instante sin sobrecargar la CPU.</li>
+</ul>
+<hr />
+<h2 id="4-guia-practica-de-construccion-de-puppets">4. 🛠️ Guía Práctica de Construcción de Puppets</h2>
+<p><em>(Manual paso a paso diseñado con lenguaje directo para el alumnado)</em></p>
+<div class="callout callout-alert">> **Regla de Oro de la Animación Artesanal:**  
+> **«La Prueba de los 10 Segundos»**: Antes de empezar a rodar, tu personaje debe ser capaz de quedarse completamente inmóvil sobre la mesa durante 10 segundos seguidos sin tambalearse ni caerse. Si se cae, necesita base más ancha o más contrapeso de plastilina en la parte inferior.
+</div>
 
-            <!-- NODO 3: HÍBRIDO -->
-            <g filter="url(#shadow)">
-              <rect x="610" y="30" width="220" height="110" rx="14" fill="#ffffff" stroke="#a7f3d0" stroke-width="2"/>
-              <rect x="610" y="30" width="220" height="8" rx="4" fill="url(#grad3)"/>
-              <circle cx="645" cy="70" r="18" fill="#ecfdf5"/>
-              <text x="645" y="76" font-size="18" text-anchor="middle">🎬</text>
-              <text x="675" y="66" font-family="sans-serif" font-size="14" font-weight="700" fill="#0f172a">Fase 3: Corto Mixto</text>
-              <text x="675" y="85" font-family="sans-serif" font-size="11" fill="#64748b">Mixto (9 Sesiones)</text>
-              <text x="625" y="115" font-family="sans-serif" font-size="11" fill="#334155">Transición + Mini Festival</text>
-            </g>
-          </svg>
-          <div class="diagram-caption">Esquema vectorial: Progresión metodológica en 34 sesiones</div>
-        </div>
+<hr />
+<h3 id="modelo-1-la-criatura-de-la-caja-nivel-muy-facil">📦 Modelo 1: La Criatura de la Caja (<em>Nivel: Muy Fácil</em>)</h3>
+<p><em>Un ser tímido o travieso que vive camuflado dentro de un envase. ¡La propia caja es su cuerpo y soporte, así que jamás se caerá!</em></p>
+<div class="vector-diagram-container">
+  <svg viewBox="0 0 320 200" width="300" height="190" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="160" cy="175" rx="100" ry="12" fill="#cbd5e1"/>
+    <!-- Cuerpo Caja -->
+    <rect x="80" y="85" width="160" height="85" rx="8" fill="#d97706" stroke="#b45309" stroke-width="3"/>
+    <!-- Contrapeso interior -->
+    <rect x="100" y="145" width="120" height="20" rx="4" fill="#334155" opacity="0.85"/>
+    <text x="160" y="159" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle" font-weight="bold">CONTRAPESO BASE</text>
+    <!-- Tapa abierta -->
+    <polygon points="80,85 60,45 220,45 240,85" fill="#f59e0b" stroke="#b45309" stroke-width="3"/>
+    <!-- Ojos saltones -->
+    <circle cx="125" cy="68" r="16" fill="#ffffff" stroke="#1e293b" stroke-width="2.5"/>
+    <circle cx="129" cy="68" r="7" fill="#0f172a"/>
+    <circle cx="185" cy="68" r="16" fill="#ffffff" stroke="#1e293b" stroke-width="2.5"/>
+    <circle cx="181" cy="68" r="7" fill="#0f172a"/>
+    <!-- Lengua / Dientes -->
+    <polygon points="140,85 146,96 152,85 158,96 164,85 170,96 176,85" fill="#ffffff"/>
+    <path d="M 145 92 Q 160 128 185 120" fill="none" stroke="#ef4444" stroke-width="7" stroke-linecap="round"/>
+  </svg>
+  <div class="diagram-caption">Estructura técnica: Puppet Criatura de la Caja (Base integrada y tapa articulada)</div>
+</div>
 
-        <div class="callout callout-info">
-          <div>💡</div>
-          <div>
-            <strong>Pilar Metodológico:</strong> El stop motion en grupos enseña la disciplina del fotograma y la colaboración; Blender de forma individual afianza la soltura en el espacio 3D y la autonomía técnica.
-          </div>
-        </div>
-      </section>
+<h4 id="materiales-que-necesitas">Materiales que necesitas</h4>
+<ul>
+<li>1 caja pequeña de cartón (pastillas, infusión o perfume pequeño).</li>
+<li>Cinta de carrocero o cinta adhesiva transparente.</li>
+<li>Plastilina de 2 o 3 colores.</li>
+<li>Cartulinas, tijeras, pegamento y rotuladores.</li>
+<li>2 tapones pequeños de botella (opcional, para los ojos).</li>
+</ul>
+<h4 id="paso-a-paso-para-alumnos">👣 Paso a Paso para Alumnos</h4>
+<ol>
+<li><strong>Prepara el contrapeso:</strong> Abre la caja y pega en el fondo interior una bola aplastada de plastilina o una piedra pequeña. Esto bajará su centro de gravedad y evitará que vuelque al moverla.</li>
+<li><strong>Crea la apertura móvil:</strong> Corta una ranura frontal o deja la tapa superior suelta, reforzando la unión trasera con una tira de cinta adhesiva a modo de bisagra.</li>
+<li><strong>Modela los ojos:</strong> Haz dos bolas de plastilina blanca y añade dos bolitas negras para las pupilas (o utiliza dos tapones de plástico). Pégalos en el borde interior de la tapa.</li>
+<li><strong>Diseña la boca y sorpresa:</strong> Recorta dientes triangulares en cartulina blanca y una lengua roja o tentáculo flexible de plastilina. Pégalos dentro de la caja.</li>
+<li><strong>Personaliza el exterior:</strong> Pinta manchas, escamas o pelo con rotuladores en las caras externas de la caja.</li>
+<li><strong>Comprobación:</strong> Abre y cierra la tapa 5 veces. Si el puppet no se mueve del sitio al soltarlo, ¡está listo para rodar!</li>
+</ol>
+<hr />
+<h3 id="modelo-2-monstruo-blob-de-plastilina-nivel-muy-facil">🟢 Modelo 2: Monstruo Blob de Plastilina (<em>Nivel: Muy Fácil</em>)</h3>
+<p><em>Una criatura gelatinosa de forma orgánica que no camina con piernas: repta, se estira, se aplasta y rueda como una gota viviente.</em></p>
+<div class="vector-diagram-container">
+  <svg viewBox="0 0 320 200" width="300" height="190" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="160" cy="175" rx="110" ry="14" fill="#cbd5e1"/>
+    <!-- Masa plastilina exterior -->
+    <path d="M 65 160 C 50 115, 90 70, 160 65 C 230 70, 270 115, 255 160 C 248 178, 72 178, 65 160 Z" fill="#10b981" stroke="#047857" stroke-width="3.5"/>
+    <!-- Núcleo ligero de aluminio -->
+    <circle cx="160" cy="125" r="38" fill="#94a3b8" stroke="#475569" stroke-dasharray="5,4" stroke-width="2.5"/>
+    <text x="160" y="129" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle" font-weight="bold">ALUMINIO</text>
+    <!-- Ojos alienígenas -->
+    <circle cx="135" cy="85" r="15" fill="#ffffff" stroke="#047857" stroke-width="2.5"/>
+    <circle cx="138" cy="85" r="6" fill="#0f172a"/>
+    <circle cx="180" cy="92" r="11" fill="#ffffff" stroke="#047857" stroke-width="2.5"/>
+    <circle cx="179" cy="92" r="5" fill="#0f172a"/>
+    <!-- Sonrisa / hendidura -->
+    <path d="M 140 148 Q 160 160 180 148" fill="none" stroke="#064e3b" stroke-width="5" stroke-linecap="round"/>
+  </svg>
+  <div class="diagram-caption">Estructura técnica: Puppet Monstruo Blob (Núcleo ligero y base ancha aplastada)</div>
+</div>
 
-      <!-- SECCIÓN 2: PASO A PASO DE LOS PUPPETS (GRÁFICOS VECTORIALES) -->
-      <section class="card">
-        <h2 class="section-title">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
-          Manual de Creación de Puppets (Guía para el Alumnado)
-        </h2>
+<h4 id="materiales-que-necesitas_1">Materiales que necesitas</h4>
+<ul>
+<li>Plastilina de colores (1 o 2 pastillas).</li>
+<li>Papel de aluminio (1 o 2 hojas arrugadas).</li>
+<li>Cartón pequeño como peana o escenario.</li>
+<li>Palillos de madera o pajitas recortadas (para pinchos o antenas).</li>
+</ul>
+<h4 id="paso-a-paso-para-alumnos_1">👣 Paso a Paso para Alumnos</h4>
+<ol>
+<li><strong>Fabrica el núcleo ligero:</strong> Arruga una hoja de papel de aluminio hasta formar una pelota ovalada compacta del tamaño de una nuez o huevo. <em>(Esto ahorra plastilina y evita que el muñeco sea demasiado pesado).</em></li>
+<li><strong>Cubre con la piel de plastilina:</strong> Aplasta plastilina entre tus manos como si hicieras una masa de pizza y forra la pelota de aluminio por completo hasta que no se vea el brillo plateado.</li>
+<li><strong>Ensancha la base:</strong> Apoya la criatura sobre la mesa y presiona suavemente hacia abajo para crear una base ancha y plana. Debe parecer una lágrima o un flan.</li>
+<li><strong>Añade rasgos expresivos:</strong> Fabrica ojos saltones con palillos clavados en el cuerpo o bolitas aplicadas directamente. Marca una hendidura para la boca con la uña o un lápiz.</li>
+<li><strong>Crea piezas de recambio (Técnica de Sustitución):</strong> Modela aparte 3 bocas de diferente tamaño (cerrada, media sonrisa y sorpresa abierta). Durante la animación solo tendrás que cambiar una por otra.</li>
+<li><strong>Comprobación:</strong> Da un suave golpe a la mesa. El monstruo no debe volcarse ni deformarse sin que tú lo toques.</li>
+</ol>
+<hr />
+<h3 id="modelo-3-planta-carnivora-en-maceta-nivel-medio">🪴 Modelo 3: Planta Carnívora en Maceta (<em>Nivel: Medio</em>)</h3>
+<p><em>Una planta con apetito insaciable que gira, asoma la cabeza y muerde. La maceta reciclada actúa como trípode natural.</em></p>
+<div class="vector-diagram-container">
+  <svg viewBox="0 0 320 210" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="160" cy="188" rx="75" ry="10" fill="#cbd5e1"/>
+    <!-- Maceta (Vaso reciclado) -->
+    <polygon points="110,130 210,130 195,182 125,182" fill="#ea580c" stroke="#9a3412" stroke-width="3"/>
+    <!-- Peso interior -->
+    <rect x="126" y="152" width="68" height="24" fill="#78350f" opacity="0.8"/>
+    <text x="160" y="167" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="9" fill="#ffffff" text-anchor="middle" font-weight="bold">CONTRAPESO</text>
+    <!-- Tallo flexible -->
+    <path d="M 160 130 Q 140 95 160 70" fill="none" stroke="#65a30d" stroke-width="9" stroke-linecap="round"/>
+    <!-- Mandíbulas -->
+    <path d="M 140 65 C 120 35, 200 35, 185 65 Z" fill="#84cc16" stroke="#4d7c0f" stroke-width="3"/>
+    <path d="M 140 65 C 125 90, 195 90, 185 65 Z" fill="#65a30d" stroke="#4d7c0f" stroke-width="3"/>
+    <!-- Dientes afilados -->
+    <polygon points="148,65 154,56 160,65 166,56 172,65 178,56 182,65" fill="#ffffff"/>
+    <!-- Hojas decorativas -->
+    <path d="M 150 130 Q 110 115 105 135 Z" fill="#84cc16"/>
+    <path d="M 170 130 Q 210 115 215 135 Z" fill="#84cc16"/>
+  </svg>
+  <div class="diagram-caption">Estructura técnica: Puppet Planta Carnívora (Maceta como anclaje y mandíbula móvil)</div>
+</div>
 
-        <div class="callout callout-alert">
-          <div>⚖️</div>
-          <div>
-            <strong>Regla de Oro - «La Prueba de los 10 Segundos»:</strong> Antes de animar, coloca tu personaje en la mesa. Debe quedarse completamente quieto durante 10 segundos sin caerse. Si vuelca, añade contrapeso de plastilina en la base.
-          </div>
-        </div>
+<h4 id="materiales-que-necesitas_2">Materiales que necesitas</h4>
+<ul>
+<li>1 vaso limpio de yogur, vaso de papel o cilindro de cartón.</li>
+<li>1 pajita de refresco flexible, limpiapipas o rollo fino de papel encintado.</li>
+<li>Cartulinas de colores y cartón fino.</li>
+<li>Plastilina y cola blanca.</li>
+<li>Hojas verdes recortadas en papel reciclado.</li>
+</ul>
+<h4 id="paso-a-paso-para-alumnos_2">👣 Paso a Paso para Alumnos</h4>
+<ol>
+<li><strong>Construye la maceta de anclaje:</strong> Llena el tercio inferior del vaso con plastilina vieja o piedras pequeñas. La maceta debe ser pesada y firme.</li>
+<li><strong>Instala el tallo:</strong> Clava la pajita o alambre forrado en el centro de la plastilina de la maceta. Comprueba que el tallo no sobrepase los 7-8 cm de altura (si es muy alto, vencerá por el peso de la cabeza).</li>
+<li><strong>Arma la cabeza móvil:</strong> </li>
+<li>Toma dos círculos o conos de cartulina o dos mitades huecas de plastilina para la mandíbula superior e inferior.</li>
+<li>Únelas por detrás con un trozo de cinta de carrocero para que funcione como una bisagra.</li>
+<li><strong>Agrega detalles amenazantes:</strong> Pega dientes triangulares de papel blanco por dentro de la boca y una lengua roja de plastilina.</li>
+<li><strong>Fija la cabeza al tallo:</strong> Conecta la mandíbula inferior al extremo del tallo usando plastilina firme o cinta adhesiva.</li>
+<li><strong>Añade hojas y decorado:</strong> Pega hojas verdes alrededor del tallo; además de embellecer, ocultarán la unión mecánica de la base.</li>
+<li><strong>Comprobación:</strong> Inclina la cabeza hacia delante simulando un mordisco. Si la maceta no se levanta del suelo, ¡es perfecta!</li>
+</ol>
+<hr />
+<h2 id="5-terminologia-clave-explicada">5. Terminología Clave Explicada</h2>
+<p><em>(Explicar cada concepto de manera vivencial durante la práctica en el aula)</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Término</th>
+<th style="text-align: left;">Definición Accesible</th>
+<th style="text-align: left;">Ejemplo Cotidiano en Clase</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Fotograma (<em>Frame</em>)</strong></td>
+<td style="text-align: left;">Cada una de las fotografías fijas que, al pasarse rápidamente, engañan al ojo humano creando movimiento.</td>
+<td style="text-align: left;">Como los dibujos en la esquina de un cuaderno que se ven en movimiento al pasar las hojas con el pulgar.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Stop Motion</strong></td>
+<td style="text-align: left;">Técnica de animación física consistente en fotografiar objetos reales modificando su postura milímetro a milímetro.</td>
+<td style="text-align: left;">Si una moneda avanza 2 milímetros en cada foto, al reproducir el vídeo parecerá que se desliza sola.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Timing</strong></td>
+<td style="text-align: left;">La velocidad y duración total de una acción (cuántas fotos empleamos para hacer un movimiento).</td>
+<td style="text-align: left;">Un movimiento de 3 fotos se percibe como un estornudo o un golpe; el mismo movimiento en 30 fotos se ve lento y sigiloso.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Spacing</strong></td>
+<td style="text-align: left;">La distancia espacial que recorre el personaje entre una foto y la siguiente.</td>
+<td style="text-align: left;">Mover la marioneta distancias mínimas genera desaceleración; moverla a saltos grandes produce velocidad.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Piel de Cebolla (<em>Onion Skin</em>)</strong></td>
+<td style="text-align: left;">Filtro semitransparente de la cámara que superpone la foto anterior sobre la imagen en directo.</td>
+<td style="text-align: left;">Permite ver exactamente cuánto has movido el brazo del muñeco respecto a la toma anterior para no equivocarte.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Storyboard</strong></td>
+<td style="text-align: left;">Cómic o guion gráfico que planifica los planos y acciones antes de empezar a rodar.</td>
+<td style="text-align: left;">Cuatro viñetas que nos evitan perder 2 horas discutiendo qué ocurre a continuación.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Primitiva 3D</strong></td>
+<td style="text-align: left;">Cuerpos geométricos puros de Blender (cubo, esfera, cilindro, cono) con los que se construye cualquier objeto.</td>
+<td style="text-align: left;">Un robot digital puede crearse a base de cubos para el torso y cilindros para los brazos.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Keyframe (Fotograma clave)</strong></td>
+<td style="text-align: left;">Marca en la línea de tiempo de Blender donde guardamos la posición, rotación o escala exacta de un objeto.</td>
+<td style="text-align: left;">En el fotograma 1 el monstruo mide 1 metro; en el fotograma 40 fijamos que mida 3 metros. Blender calcula el crecimiento intermedio.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Viewport</strong></td>
+<td style="text-align: left;">La ventana de trabajo 3D donde navegamos, colocamos cámaras y modelamos.</td>
+<td style="text-align: left;">Es el "estudio de rodaje virtual" visto a través del monitor del ordenador.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Render</strong></td>
+<td style="text-align: left;">El procesado por el cual el ordenador dibuja la imagen final con todas sus luces, sombras y colores terminados.</td>
+<td style="text-align: left;">Como imprimir la lámina final para poder enseñarla fuera de Blender.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="6-programacion-completa-de-sesiones">6. Programación Completa de Sesiones</h2>
+<pre><code> [ FASE 1: STOP MOTION ARTESANAL ]    ──► Sesiones 01 a 11 (11 sesiones)
+ [ FASE 2: BLENDER DIGITAL BÁSICO ]   ──► Sesiones 12 a 25 (14 sesiones)
+ [ FASE 3: PROYECTO FINAL HÍBRIDO ]   ──► Sesiones 26 a 34 (09 sesiones)
+</code></pre>
+<h3 id="bloque-1-stop-motion-artesanal-sesiones-1-a-11">🔴 Bloque 1: Stop Motion Artesanal (Sesiones 1 a 11)</h3>
+<h4 id="sesion-1-que-es-animar-la-magia-del-engano-visual">Sesión 1: ¿Qué es animar? La magia del engaño visual</h4>
+<ul>
+<li><strong>Objetivo:</strong> Comprender empíricamente que la animación es ilusión óptica creada con imágenes fijas sucesivas.</li>
+<li><strong>Competencias:</strong> CCL, CD, CPSAA, CCEC.</li>
+<li><strong>Metodología y dinámica:</strong> Explicación de 10' sobre persistencia retiniana. Prueba práctica por grupos: animar un estuche, borrador o bolígrafo deslizándose sobre la mesa en 15-20 fotogramas.</li>
+<li><strong>Entregable:</strong> Microclip de prueba de 3 a 5 segundos.</li>
+<li><strong>Consejo docente:</strong> Evitar guiones en esta sesión; el objetivo único es asimilar la cadencia "mover-soltar-disparar".</li>
+</ul>
+<h4 id="sesion-2-idea-personaje-y-micro-historia-15-segundos">Sesión 2: Idea, personaje y micro-historia (15 segundos)</h4>
+<ul>
+<li><strong>Objetivo:</strong> Plantear una narrativa minimalista y ejecutable con inicio, conflicto simple y desenlace visual.</li>
+<li><strong>Competencias:</strong> CCL, CPSAA, CE, CCEC.</li>
+<li><strong>Metodología y dinámica:</strong> Lluvia de ideas individual. En grupo seleccionan una propuesta viable. Rellenan la <em>Ficha de Micro-Historia</em>: ¿Quién es? ¿Qué busca? ¿Qué obstáculo encuentra? ¿Cómo acaba?</li>
+<li><strong>Entregable:</strong> Ficha de guion validada por el profesorado.</li>
+<li><strong>Consejo docente:</strong> Descartar ideas ambiciosas con persecuciones o muchos personajes. Priorizar una sola acción concreta (abrir una caja, esquivar un objeto, etc.).</li>
+</ul>
+<h4 id="sesion-3-diseno-visual-y-silueta-del-puppet">Sesión 3: Diseño visual y silueta del puppet</h4>
+<ul>
+<li><strong>Objetivo:</strong> Dibujar el diseño del personaje adaptándolo a los principios de estabilidad física.</li>
+<li><strong>Competencias:</strong> CCL, CCEC, CE, CPSAA.</li>
+<li><strong>Metodología y dinámica:</strong> Cada alumno dibuja 2 propuestas en papel aplicando la regla: cuerpo bajo, base ancha o soporte integrado (caja, maceta, oruga). El grupo consensúa el modelo final.</li>
+<li><strong>Entregable:</strong> Ficha de diseño con colores y despiece de materiales.</li>
+</ul>
+<h4 id="sesiones-4-y-5-taller-de-construccion-artesanal-i-y-ii">Sesiones 4 y 5: Taller de construcción artesanal (I y II)</h4>
+<ul>
+<li><strong>Objetivo:</strong> Ensamblar la estructura volumétrica, asegurar el centro de gravedad y añadir rasgos expresivos.</li>
+<li><strong>Competencias:</strong> STEM, CCEC, CPSAA, CE.</li>
+<li><strong>Metodología y dinámica:</strong></li>
+<li><em>Sesión 4:</em> Estructura base (cartón, contrapesos de plastilina, núcleos de aluminio). Superar "La Prueba de los 10 Segundos".</li>
+<li><em>Sesión 5:</em> Añadido de ojos saltones, bocas de sustitución, texturas de lana o tela.</li>
+<li><strong>Entregable:</strong> Marioneta física terminada y estable.</li>
+</ul>
+<h4 id="sesiones-6-y-7-construccion-del-micro-escenario-y-atrezo-i-y-ii">Sesiones 6 y 7: Construcción del micro-escenario y atrezo (I y II)</h4>
+<ul>
+<li><strong>Objetivo:</strong> Diseñar un set físico a escala proporcional al muñeco que controle el espacio de rodaje.</li>
+<li><strong>Competencias:</strong> CCEC, STEM, CE, CPSAA.</li>
+<li><strong>Metodología y dinámica:</strong></li>
+<li><em>Sesión 6:</em> Construcción de suelo y pared en una caja de zapatos o cartón plegado.</li>
+<li><em>Sesión 7:</em> Elementos de interacción (una llave, una puerta, un portal misterioso o una piedra de plastilina).</li>
+<li><strong>Entregable:</strong> Set de rodaje completado con referencias marcadas con cinta adhesiva.</li>
+</ul>
+<h4 id="sesion-8-iluminacion-constante-fijacion-de-camara-y-prueba-tecnica">Sesión 8: Iluminación constante, fijación de cámara y prueba técnica</h4>
+<ul>
+<li><strong>Objetivo:</strong> Calibrar el set para evitar parpadeos de luz (<em>flicker</em>) y movimientos accidentales del encuadre.</li>
+<li><strong>Competencias:</strong> CD, STEM, CPSAA, CCEC.</li>
+<li><strong>Metodología y dinámica:</strong> Anclar el soporte de la cámara a la mesa con cinta. Apagar o aislar luz natural variable y encender flexo fijo. Realizar una secuencia de calibración de 20 fotogramas.</li>
+<li><strong>Entregable:</strong> Vídeo de calibración sin saltos de cámara ni cambios de brillo.</li>
+</ul>
+<h4 id="sesion-9-storyboard-esquematico">Sesión 9: Storyboard esquemático</h4>
+<ul>
+<li><strong>Objetivo:</strong> Desglosar la escena en 4-6 viñetas identificando encuadres (Plano General y Primer Plano).</li>
+<li><strong>Competencias:</strong> CCL, CCEC, CE, CPSAA.</li>
+<li><strong>Metodología y dinámica:</strong> Dibujar en plantilla de viñetas qué se ve en cada plano y cuántas fotos requerirá aproximadamente cada fragmento.</li>
+<li><strong>Entregable:</strong> Guion técnico gráfico (<em>storyboard</em>) en el corcho del grupo.</li>
+</ul>
+<h4 id="sesiones-10-y-11-rodaje-en-stop-motion-y-montaje-basico">Sesiones 10 y 11: Rodaje en Stop Motion y montaje básico</h4>
+<ul>
+<li><strong>Objetivo:</strong> Capturar la secuencia final fotograma a fotograma y sonorizar con ruidos cotidianos (<em>foley</em>).</li>
+<li><strong>Competencias:</strong> CD, CPSAA, CCEC, CCL.</li>
+<li><strong>Metodología y dinámica:</strong></li>
+<li><em>Sesión 10:</em> Rodaje de las acciones principales con control de <em>onion skin</em> y <em>spacing</em>.</li>
+<li><em>Sesión 11:</em> Retomas de emergencia, exportación del clip y grabación de 2 ruidos de sala con la app de sonido.</li>
+<li><strong>Entregable:</strong> Clip de vídeo del microcorto de Stop Motion (10-15 s).</li>
+</ul>
+<hr />
+<h3 id="bloque-2-blender-basico-individual-sesiones-12-a-25">🟡 Bloque 2: Blender Básico Individual (Sesiones 12 a 25)</h3>
+<h4 id="sesion-12-primeros-pasos-en-el-espacio-tridimensional">Sesión 12: Primeros pasos en el espacio tridimensional</h4>
+<ul>
+<li><strong>Objetivo:</strong> Familiarizarse con el <em>viewport</em>, los 3 ejes de coordenadas y la navegación básica.</li>
+<li><strong>Competencias:</strong> CD, STEM, CPSAA.</li>
+<li><strong>Metodología:</strong> Aprender exclusivamente 4 operaciones: Orbitar (botón central), Desplazar/Pan (Shift + botón central), Zoom (rueda) y Guardar (<code>Ctrl + S</code>).</li>
+<li><strong>Entregable:</strong> Archivo <code>nombre_alumno_sesion12.blend</code>.</li>
+</ul>
+<h4 id="sesion-13-modelado-con-primitivas-geometricas">Sesión 13: Modelado con primitivas geométricas</h4>
+<ul>
+<li><strong>Objetivo:</strong> Construir una figura articulada sencilla mediante combinación y escalado de figuras básicas.</li>
+<li><strong>Competencias:</strong> CD, STEM, CCEC.</li>
+<li><strong>Metodología:</strong> Añadir (<code>Shift + A</code>) cubos, esferas y cilindros. Práctica de mover (<code>G</code>), rotar (<code>R</code>) y escalar (<code>S</code>). Duplicar piezas con <code>Shift + D</code>.</li>
+<li><strong>Entregable:</strong> Robot o criatura básica creada con al menos 6 primitivas.</li>
+</ul>
+<h4 id="sesiones-14-y-15-recreacion-3d-del-personaje-artesanal-i-y-ii">Sesiones 14 y 15: Recreación 3D del personaje artesanal (I y II)</h4>
+<ul>
+<li><strong>Objetivo:</strong> Trasladar el puppet del mundo real a un gemelo digital simplificado.</li>
+<li><strong>Competencias:</strong> CD, STEM, CCEC, CE.</li>
+<li><strong>Metodología:</strong></li>
+<li><em>Sesión 14:</em> Silueta general y volúmenes principales (la caja, el cuerpo blob o la maceta).</li>
+<li><em>Sesión 15:</em> Accesorios y rostro: ojos esféricos, dientes cónicos y rasgos distintivos.</li>
+<li><strong>Entregable:</strong> Modelo digital del puppet propio guardado en <code>.blend</code>.</li>
+</ul>
+<h4 id="sesion-16-materiales-colores-y-rugosidad">Sesión 16: Materiales, colores y rugosidad</h4>
+<ul>
+<li><strong>Objetivo:</strong> Otorgar personalidad cromática al modelo mediante el panel de propiedades.</li>
+<li><strong>Competencias:</strong> CD, CCEC, CE.</li>
+<li><strong>Metodología:</strong> Crear materiales en el motor básico, asignar <em>Base Color</em> y ajustar la <em>Roughness</em> (mate vs. reflectante).</li>
+<li><strong>Entregable:</strong> Personaje 3D con al menos 3 materiales diferenciados aplicados.</li>
+</ul>
+<h4 id="sesiones-17-y-18-el-set-digital-y-el-objeto-interactivo">Sesiones 17 y 18: El set digital y el objeto interactivo</h4>
+<ul>
+<li><strong>Objetivo:</strong> Modelar un entorno mínimo (suelo y pared) y el elemento narrativo (portal, pantalla o cofre).</li>
+<li><strong>Competencias:</strong> CD, STEM, CCEC.</li>
+<li><strong>Metodología:</strong> Crear un plano amplio como base y situar el elemento que servirá de puente narrativo con el mundo real.</li>
+<li><strong>Entregable:</strong> Escenario 3D integrado listo para la cámara.</li>
+</ul>
+<h4 id="sesion-19-encuadre-con-la-camara-virtual">Sesión 19: Encuadre con la cámara virtual</h4>
+<ul>
+<li><strong>Objetivo:</strong> Comprender la vista de cámara de Blender (<code>0</code> en el teclado numérico o icono de visor) y fijar el encuadre.</li>
+<li><strong>Competencias:</strong> CD, CCEC, CCL.</li>
+<li><strong>Metodología:</strong> Posicionar la cámara en Plano General y practicar el bloqueo de vista (<em>Lock Camera to View</em>).</li>
+<li><strong>Entregable:</strong> Una imagen estática renderizada con encuadre óptimo.</li>
+</ul>
+<h4 id="sesion-20-iluminacion-digital-y-atmosfera">Sesión 20: Iluminación digital y atmósfera</h4>
+<ul>
+<li><strong>Objetivo:</strong> Manipular focos virtuales (<em>Point</em> y <em>Sun</em>) para generar luz funcional y sombras expresivas.</li>
+<li><strong>Competencias:</strong> CD, STEM, CCEC.</li>
+<li><strong>Metodología:</strong> Iluminación de dos puntos: luz principal lateral y luz de relleno de bajo contraste.</li>
+<li><strong>Entregable:</strong> Escena con jerarquía lumínica clara.</li>
+</ul>
+<h4 id="sesiones-21-22-y-23-animacion-mediante-keyframes-i-ii-y-iii">Sesiones 21, 22 y 23: Animación mediante Keyframes (I, II y III)</h4>
+<ul>
+<li><strong>Objetivo:</strong> Dominar el <em>Timeline</em> y los conceptos de pose inicial, pose intermedia y pose final.</li>
+<li><strong>Competencias:</strong> CD, STEM, CPSAA, CCEC.</li>
+<li><strong>Metodología:</strong></li>
+<li><em>Sesión 21:</em> Insertar fotograma clave (<code>I</code> -&gt; Location/Rotation) en fotograma 1 y desplazar el objeto en el 40.</li>
+<li><em>Sesión 22:</em> Incorporar rotación y escala para fingir un rebote o giro.</li>
+<li><em>Sesión 23:</em> Introducir <strong>anticipación</strong> (agacharse ligeramente antes de saltar) y pausa de lectura al final.</li>
+<li><strong>Entregable:</strong> Movimiento orgánico de 60 a 80 fotogramas.</li>
+</ul>
+<h4 id="sesion-24-expresividad-directa-sin-esqueleto-rigless-acting">Sesión 24: Expresividad directa sin esqueleto (<em>Rigless Acting</em>)</h4>
+<ul>
+<li><strong>Objetivo:</strong> Simular emociones moviendo piezas independientes sin necesidad de complicadas armaduras de huesos.</li>
+<li><strong>Competencias:</strong> CD, CCEC, CPSAA.</li>
+<li><strong>Metodología:</strong> Mover pupilas para cambiar la mirada, balancear el cuerpo o abrir la tapa/boca para expresar sorpresa o miedo.</li>
+<li><strong>Entregable:</strong> Clip expresivo terminado.</li>
+</ul>
+<h4 id="sesion-25-renderizado-y-exportacion-rapida">Sesión 25: Renderizado y exportación rápida</h4>
+<ul>
+<li><strong>Objetivo:</strong> Transformar la animación digital en un archivo de vídeo estándar (<code>.mp4</code> o secuencia JPG/PNG).</li>
+<li><strong>Competencias:</strong> CD, STEM, CPSAA.</li>
+<li><strong>Metodología:</strong> Configurar resolución a 720p o ejecutar <em>Viewport Render Animation</em> para obtener el vídeo en pocos segundos.</li>
+<li><strong>Entregable:</strong> Clip de vídeo digital de 5 a 10 segundos en la carpeta compartida.</li>
+</ul>
+<hr />
+<h3 id="bloque-3-proyecto-final-hibrido-sesiones-26-a-34">🔵 Bloque 3: Proyecto Final Híbrido (Sesiones 26 a 34)</h3>
+<h4 id="sesion-26-la-idea-puente-de-lo-fisico-a-lo-digital">Sesión 26: La idea puente: De lo físico a lo digital</h4>
+<ul>
+<li><strong>Objetivo:</strong> Idear el recurso narrativo de transición que comunique el clip manual con el digital.</li>
+<li><strong>Competencias:</strong> CCL, CE, CCEC, CPSAA.</li>
+<li><strong>Metodología:</strong> El grupo escoge el mecanismo de viaje interdimensional:</li>
+<li><em>La Caja Portal:</em> El puppet físico entra en su caja; al cerrarse, se abre en Blender.</li>
+<li><em>La Pantalla Encendida:</em> El puppet mira hacia un teléfono o espejo y la imagen se convierte en 3D.</li>
+<li><em>El Destello Mágico:</em> El puppet toca un objeto y se transforma en su versión poligonal.</li>
+<li><strong>Entregable:</strong> Guion de la transición aprobado.</li>
+</ul>
+<h4 id="sesion-27-guion-grafico-integrado-y-distribucion-de-tareas">Sesión 27: Guion gráfico integrado y distribución de tareas</h4>
+<ul>
+<li><strong>Objetivo:</strong> Dibujar el <em>storyboard</em> definitivo indicando qué planos son físicos y cuáles digitales.</li>
+<li><strong>Competencias:</strong> CCL, CPSAA, CE, CCEC.</li>
+<li><strong>Metodología:</strong> Dividir los 20-30 segundos totales del corto: 10s Stop Motion + 2s Transición + 10s Blender. Repartir responsabilidades.</li>
+<li><strong>Entregable:</strong> Guion técnico final pegado en la estación de trabajo.</li>
+</ul>
+<h4 id="sesiones-28-29-y-30-rodaje-stop-motion-del-corto-final">Sesiones 28, 29 y 30: Rodaje Stop Motion del corto final</h4>
+<ul>
+<li><strong>Objetivo:</strong> Rodar la parte física asegurando que el último fotograma coincida milimétricamente con el plano de transición.</li>
+<li><strong>Competencias:</strong> CD, CPSAA, CCEC, CE.</li>
+<li><strong>Metodología:</strong> Puesta a punto del set, rodaje de la acción inicial y grabación del plano detalle de transición (cierre de puerta, toque de objeto, etc.).</li>
+<li><strong>Entregable:</strong> Toma física definitiva procesada y guardada.</li>
+</ul>
+<h4 id="sesiones-31-32-y-33-animacion-blender-de-la-escena-final">Sesiones 31, 32 y 33: Animación Blender de la escena final</h4>
+<ul>
+<li><strong>Objetivo:</strong> Ajustar el clip digital individual para que continúe la acción exacta dejada por el puppet de cartón.</li>
+<li><strong>Competencias:</strong> CD, STEM, CCEC, CPSAA.</li>
+<li><strong>Metodología:</strong> Cada estudiante adapta su modelo digital para que entre en escena con la misma inercia o dirección con la que desapareció en el set físico. Exportación del clip en alta compatibilidad.</li>
+<li><strong>Entregable:</strong> Clip 3D final exportado listo para el montaje conjunto.</li>
+</ul>
+<h4 id="sesion-34-edicion-final-sonorizacion-y-mini-festival-del-aula">Sesión 34: Edición final, sonorización y Mini-Festival del aula</h4>
+<ul>
+<li><strong>Objetivo:</strong> Ensamblar los dos fragmentos en un editor simple, añadir créditos y proyectar en pantalla grande.</li>
+<li><strong>Competencias:</strong> CCL, CD, CPSAA, CE, CCEC.</li>
+<li><strong>Metodología:</strong> Unir los clips, superponer efectos sonoros libres de derechos y proyectar todos los trabajos en el aula. Breve ronda de coevaluación y aplausos.</li>
+<li><strong>Entregable:</strong> Cortometraje híbrido completo y ficha de autorreflexión individual.</li>
+</ul>
+<hr />
+<h2 id="7-evaluacion-inclusion-y-seguridad">7. Evaluación, Inclusión y Seguridad</h2>
+<h3 id="rubrica-de-evaluacion-formativa">📋 Rúbrica de Evaluación Formativa</h3>
+<pre><code>                     RÚBRICA DE VALORACIÓN (1 a 4)
+┌────────────────────────────┬─────────────────────────────┬───────────────────────────┐
+│ Criterio                   │ Nivel 1-2 (En desarrollo)   │ Nivel 3-4 (Conseguido)    │
+├────────────────────────────┼─────────────────────────────┼───────────────────────────┤
+│ 1. Estabilidad del Puppet  │ Vuelca con facilidad o se   │ Se sostiene firme durante │
+│                            │ deforma al manipularlo.     │ 10 segundos continuados.  │
+├────────────────────────────┼─────────────────────────────┼───────────────────────────┤
+│ 2. Continuidad &amp; Spacing   │ Movimientos a saltos o      │ Desplazamiento progresivo │
+│                            │ cambios bruscos de cámara.  │ y cámara estable fijada.  │
+├────────────────────────────┼─────────────────────────────┼───────────────────────────┤
+│ 3. Destreza en Blender     │ Dependencia constante;      │ Añade primitivas, color   │
+│                            │ problemas para guardar.     │ e inserta keyframes solo. │
+├────────────────────────────┼─────────────────────────────┼───────────────────────────┤
+│ 4. Trabajo en Equipo       │ Monopolio o desinterés      │ Asume su rol y colabora   │
+│                            │ de tareas en el set.        │ activamente con el grupo. │
+└────────────────────────────┴─────────────────────────────┴───────────────────────────┘
+</code></pre>
+<h3 id="medidas-de-inclusion-y-dua-diseno-universal-para-el-aprendizaje">♿ Medidas de Inclusión y DUA (Diseño Universal para el Aprendizaje)</h3>
+<ul>
+<li><strong>Plantillas preconfiguradas:</strong> Alumnado con dificultades motrices o cognitivas recibe un archivo <code>.blend</code> con el suelo, la luz y la cámara ya bloqueados, requiriendo únicamente mover y colorear el personaje.</li>
+<li><strong>Diversidad de roles:</strong> Los estudiantes con menor motricidad fina pueden destacar en la dirección, la continuidad, la sonorización o el diseño de carteles.</li>
+<li><strong>Refuerzo para alumnado avanzado:</strong> Retos opcionales como añadir luz de contra (<em>rim light</em>), diseñar un accesorio secundario en 3D o crear un cartel promocional en Canva.</li>
+</ul>
+<h3 id="protocolo-de-seguridad-en-el-aula">⚠️ Protocolo de Seguridad en el Aula</h3>
+<div class="callout callout-alert">> * **Prohibido el uso de pistolas de silicona caliente por el alumnado.** La silicona caliente sólo debe ser operada por el profesor en un punto único de fijación rápida si fuera estrictamente necesaria. Se priorizará siempre cola blanca y cinta de carrocero.
+> * **Sin alambres expuestos:** Todos los alambres o clips deben tener sus puntas dobladas en bucle y encintadas para evitar pinchazos.
+> * **Protección de Datos:** Las grabaciones de Stop Motion se centran exclusivamente en las marionetas y decorados; **no deben grabarse rostros de alumnos** en los cortometrajes.
+</div>
+<hr />
+<h2 id="8-anexo-programacion-curricular-lomloe">8. Anexo: Programación Curricular (LOMLOE)</h2>
+<h3 id="vinculacion-con-las-competencias-clave">Vinculación con las Competencias Clave</h3>
+<pre><code class="language-mermaid">graph TD
+    A[Proyecto Animación &amp; 3D] --&gt; B[CCL: Comunicación Lingüística]
+    A --&gt; C[STEM: Ciencia, Tecnología y Matemáticas]
+    A --&gt; D[CD: Competencia Digital]
+    A --&gt; E[CPSAA: Personal, Social y Aprender a Aprender]
+    A --&gt; F[CCEC: Expresión Cultural y Artística]
 
-        <div class="puppets-grid">
-
-          <!-- PUPPET 1: CRIATURA DE LA CAJA -->
-          <div class="puppet-card">
-            <div class="puppet-illustration">
-              <!-- VECTOR PUPPET 1 -->
-              <svg viewBox="0 0 220 180" width="100%" height="160" xmlns="http://www.w3.org/2000/svg">
-                <!-- Sombra -->
-                <ellipse cx="110" cy="160" rx="70" ry="10" fill="#cbd5e1"/>
-                <!-- Cuerpo Caja -->
-                <rect x="50" y="80" width="120" height="75" rx="6" fill="#d97706" stroke="#b45309" stroke-width="3"/>
-                <!-- Contrapeso interior (indicador fantasma) -->
-                <rect x="65" y="130" width="90" height="18" rx="4" fill="#475569" opacity="0.6"/>
-                <text x="110" y="143" font-family="sans-serif" font-size="9" fill="#ffffff" text-anchor="middle" font-weight="bold">CONTRAPESO BASE</text>
-                <!-- Tapa abierta -->
-                <polygon points="50,80 35,45 155,45 170,80" fill="#f59e0b" stroke="#b45309" stroke-width="3"/>
-                <!-- Ojos saltones -->
-                <circle cx="85" cy="65" r="14" fill="#ffffff" stroke="#1e293b" stroke-width="2"/>
-                <circle cx="88" cy="65" r="6" fill="#0f172a"/>
-                <circle cx="135" cy="65" r="14" fill="#ffffff" stroke="#1e293b" stroke-width="2"/>
-                <circle cx="132" cy="65" r="6" fill="#0f172a"/>
-                <!-- Lengua / Dientes -->
-                <polygon points="95,80 100,90 105,80 110,90 115,80 120,90 125,80" fill="#ffffff"/>
-                <path d="M 100 85 Q 110 115 130 110" fill="none" stroke="#ef4444" stroke-width="6" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="puppet-content">
-              <span class="puppet-tag tag-easy">Nivel: Muy Fácil</span>
-              <h3 style="font-size:1.15rem; margin-bottom:0.5rem; color:#0f172a;">1. La Criatura de la Caja</h3>
-              <p style="font-size:0.88rem; color:#64748b; margin-bottom:0.75rem;">Cuerpo rígido y base integrada. ¡No tiene piernas, por lo que nunca tropieza!</p>
-              <ol class="step-list">
-                <li><strong>Añade contrapeso:</strong> Pega plastilina o una piedra en el fondo interior de una caja pequeña.</li>
-                <li><strong>Bisagra de la tapa:</strong> Refuerza la parte trasera con cinta adhesiva para abrirla suavemente.</li>
-                <li><strong>Ojos saltones:</strong> Modela dos bolas de plastilina o tapones en el borde interior.</li>
-                <li><strong>Boca y sorpresa:</strong> Añade dientes de cartulina y lengua de plastilina o tentáculo.</li>
-              </ol>
-            </div>
-          </div>
-
-          <!-- PUPPET 2: MONSTRUO BLOB -->
-          <div class="puppet-card">
-            <div class="puppet-illustration">
-              <!-- VECTOR PUPPET 2 -->
-              <svg viewBox="0 0 220 180" width="100%" height="160" xmlns="http://www.w3.org/2000/svg">
-                <!-- Sombra -->
-                <ellipse cx="110" cy="160" rx="80" ry="12" fill="#cbd5e1"/>
-                <!-- Cuerpo Blob de Plastilina -->
-                <path d="M 40 145 C 30 110, 60 70, 110 65 C 160 70, 190 110, 180 145 C 175 160, 45 160, 40 145 Z" fill="#10b981" stroke="#047857" stroke-width="3"/>
-                <!-- Núcleo de aluminio (representación en sección) -->
-                <circle cx="110" cy="115" r="28" fill="#94a3b8" stroke="#475569" stroke-dasharray="4,3" stroke-width="2"/>
-                <text x="110" y="118" font-family="sans-serif" font-size="8" fill="#ffffff" text-anchor="middle" font-weight="bold">ALUMINIO</text>
-                <!-- Ojos alienígenas -->
-                <circle cx="90" cy="80" r="12" fill="#ffffff" stroke="#047857" stroke-width="2"/>
-                <circle cx="92" cy="80" r="5" fill="#0f172a"/>
-                <circle cx="125" cy="85" r="9" fill="#ffffff" stroke="#047857" stroke-width="2"/>
-                <circle cx="124" cy="85" r="4" fill="#0f172a"/>
-                <!-- Boca expresiva -->
-                <path d="M 95 130 Q 110 140 125 130" fill="none" stroke="#064e3b" stroke-width="4" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="puppet-content">
-              <span class="puppet-tag tag-easy">Nivel: Muy Fácil</span>
-              <h3 style="font-size:1.15rem; margin-bottom:0.5rem; color:#0f172a;">2. Monstruo Blob</h3>
-              <p style="font-size:0.88rem; color:#64748b; margin-bottom:0.75rem;">Masa blanda y viscosa que repta, se aplasta y se transforma sin volcarse.</p>
-              <ol class="step-list">
-                <li><strong>Pelota de aluminio:</strong> Arruga papel de aluminio para crear el núcleo ligero y ahorrar plastilina.</li>
-                <li><strong>Capa de plastilina:</strong> Forra el núcleo con plastilina extendida como una masa.</li>
-                <li><strong>Base ancha aplastada:</strong> Presiona contra la mesa creando forma de lágrima o flan.</li>
-                <li><strong>Piezas intercambiables:</strong> Fabrica 3 bocas sueltas para cambiarlas en cada foto.</li>
-              </ol>
-            </div>
-          </div>
-
-          <!-- PUPPET 3: PLANTA CARNÍVORA -->
-          <div class="puppet-card">
-            <div class="puppet-illustration">
-              <!-- VECTOR PUPPET 3 -->
-              <svg viewBox="0 0 220 180" width="100%" height="160" xmlns="http://www.w3.org/2000/svg">
-                <!-- Sombra -->
-                <ellipse cx="110" cy="165" rx="55" ry="8" fill="#cbd5e1"/>
-                <!-- Maceta (Vaso reciclado) -->
-                <polygon points="75,120 145,120 135,160 85,160" fill="#ea580c" stroke="#9a3412" stroke-width="3"/>
-                <!-- Plastilina de soporte en maceta -->
-                <rect x="84" y="135" width="52" height="18" fill="#78350f" opacity="0.7"/>
-                <text x="110" y="147" font-family="sans-serif" font-size="8" fill="#ffffff" text-anchor="middle" font-weight="bold">SOPORTE</text>
-                <!-- Tallo flexible -->
-                <path d="M 110 120 Q 95 90 110 70" fill="none" stroke="#65a30d" stroke-width="7" stroke-linecap="round"/>
-                <!-- Cabeza Planta Mandíbula -->
-                <path d="M 95 65 C 80 40, 140 40, 130 65 Z" fill="#84cc16" stroke="#4d7c0f" stroke-width="2.5"/>
-                <path d="M 95 65 C 85 85, 135 85, 130 65 Z" fill="#65a30d" stroke="#4d7c0f" stroke-width="2.5"/>
-                <!-- Dientes -->
-                <polygon points="100,65 105,58 110,65 115,58 120,65" fill="#ffffff"/>
-                <!-- Hojas base -->
-                <path d="M 105 120 Q 75 110 70 125 Z" fill="#84cc16"/>
-                <path d="M 115 120 Q 145 110 150 125 Z" fill="#84cc16"/>
-              </svg>
-            </div>
-            <div class="puppet-content">
-              <span class="puppet-tag tag-medium">Nivel: Medio</span>
-              <h3 style="font-size:1.15rem; margin-bottom:0.5rem; color:#0f172a;">3. Planta en Maceta</h3>
-              <p style="font-size:0.88rem; color:#64748b; margin-bottom:0.75rem;">Para alumnos que buscan un reto: la maceta funciona como peana y trípode.</p>
-              <ol class="step-list">
-                <li><strong>Maceta anclada:</strong> Llena un tercio de un vaso de yogur con plastilina pesada.</li>
-                <li><strong>Tallo corto:</strong> Clava una pajita o alambre forrado de no más de 7 cm de altura.</li>
-                <li><strong>Mandíbulas dobles:</strong> Une dos piezas de cartulina con cinta posterior como bisagra.</li>
-                <li><strong>Prueba de mordisco:</strong> Inclina la cabeza hacia delante y verifica que no vuelque.</li>
-              </ol>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      <!-- SECCIÓN 3: RESUMEN DE SESIONES -->
-      <section class="card">
-        <h2 class="section-title">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-          Organización Didáctica del Curso (34 Sesiones)
-        </h2>
-
-        <div class="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th>Bloque</th>
-                <th>Sesiones</th>
-                <th>Contenido Clave</th>
-                <th>Dinámica</th>
-                <th>Resultado de Etapa</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>Bloque 1: Stop Motion</strong></td>
-                <td>Sesiones 1 a 11</td>
-                <td>Principios de animación, diseño de puppet, estabilidad, escenografía y rodaje con cebolla (onion skin).</td>
-                <td>Grupos de 3-4</td>
-                <td>Microcorto Stop Motion (10-15s)</td>
-              </tr>
-              <tr>
-                <td><strong>Bloque 2: Blender 3D</strong></td>
-                <td>Sesiones 12 a 25</td>
-                <td>Navegación 3D, modelado con primitivas (sin mallas complejas), color, cámara, luces y keyframes.</td>
-                <td>Individual</td>
-                <td>Clip 3D de personaje animado</td>
-              </tr>
-              <tr>
-                <td><strong>Bloque 3: Proyecto Híbrido</strong></td>
-                <td>Sesiones 26 a 34</td>
-                <td>Idea puente (portal/pantalla/caja), rodaje sincronizado físico-digital, sonorización y festival.</td>
-                <td>Mixto</td>
-                <td>Cortometraje mixto proyectado</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
+    B --- B1[&quot;Guion, puesta en común y presentación&quot;]
+    C --- C1[&quot;Geometría 3D, equilibrio físico y volumen&quot;]
+    D --- D1[&quot;Blender, captura fotográfica y montaje&quot;]
+    E --- E1[&quot;Tolerancia a la frustración y reparto de tareas&quot;]
+    F --- F1[&quot;Diseño de personajes y lenguaje audiovisual&quot;]
+</code></pre>
+<ul>
+<li><strong>CCL:</strong> Redacción de la idea, comunicación clara de directrices de rodaje y exposición oral durante el festival final.</li>
+<li><strong>STEM:</strong> Cálculo de proporciones espaciales, centro de gravedad físico, ejes cartesianos (X, Y, Z) en el entorno digital.</li>
+<li><strong>CD:</strong> Gestión autónoma de archivos (<code>.blend</code>, carpetas de proyecto), captura digital de imágenes y renderizado responsable.</li>
+<li><strong>CPSAA:</strong> Paciencia en el proceso foto a foto, aprendizaje del ensayo-error y autogestión de frustraciones técnicas.</li>
+<li><strong>CCEC:</strong> Creación plástica manual con materiales cotidianos y adquisición de cultura cinematográfica y de animación.</li>
+</ul>
+<h3 id="presupuesto-cero-recursos-de-bajo-impacto">Presupuesto Cero / Recursos de Bajo Impacto</h3>
+<ul>
+<li><strong>Software:</strong> 100% Libre y de código abierto (Blender, apps de captura gratuitas como <em>Stop Motion Studio</em> o <em>OpenShot</em> para edición de vídeo).</li>
+<li><strong>Materiales fungibles:</strong> Cartón reutilizado, envases limpios traídos de los hogares y plastilina compartida entre equipos.</li>
+</ul>
+<hr />
+<h2 id="9-referencias-consultadas">9. Referencias Consultadas</h2>
+<ul>
+<li><a href="https://educagob.educacionfpydeportes.gob.es/curriculo/curriculo-lomloe/menu-curriculos-basicos.html">Educagob - Competencias Clave en Educación Primaria y Secundaria (LOMLOE)</a></li>
+<li><a href="https://educagob.educacionfpydeportes.gob.es/curriculo/curriculo-lomloe/menu-curriculos-basicos/ed-primaria/areas/educacion-artistica/criterios-evaluacion-tercer-ciclo.html">Educación Artística: Criterios de Evaluación Oficiales</a></li>
+<li><a href="https://www.blender.org/download/requirements/">Blender Foundation: Requisitos Oficiales de Hardware</a></li>
+<li><a href="https://www.stopmotionstudio.com/education/index.html">Stop Motion Studio: Recursos Educativos y Guías de Aula</a></li>
+<li><a href="https://www.stopmotionstudio.com/help/stopmotion/en/onion-skinning.html">Documentación técnica de Onion Skinning</a></li>
+</ul>
+      </div>
     </main>
   </div>
 
   <script>
-    // SCRIPT DEL MODAL DE PROTECCIÓN CON CÓDIGO
     document.addEventListener("DOMContentLoaded", function () {
       const modal = document.getElementById("access-modal-overlay");
       const wrapper = document.getElementById("content-wrapper");
@@ -720,13 +924,11 @@
       const btn = document.getElementById("unlock-btn");
       const errorMsg = document.getElementById("access-error");
 
-      // Claves válidas (en minúsculas)
       const validCodes = ["blender2026", "animacion", "stopmotion", "docente", "1234"];
 
       function checkCode() {
         const val = input.value.trim().toLowerCase();
         if (validCodes.includes(val)) {
-          // Desbloqueo exitoso
           modal.style.transition = "opacity 0.3s ease, transform 0.3s ease";
           modal.style.opacity = "0";
           modal.style.transform = "scale(1.05)";
@@ -735,18 +937,14 @@
             wrapper.classList.add("unlocked");
           }, 300);
         } else {
-          // Error
           errorMsg.style.display = "block";
           input.style.borderColor = "#ef4444";
-          input.classList.add("shake");
-          setTimeout(() => input.classList.remove("shake"), 400);
           input.focus();
           input.select();
         }
       }
 
       btn.addEventListener("click", checkCode);
-
       input.addEventListener("keydown", function (e) {
         if (e.key === "Enter") {
           checkCode();

@@ -492,7 +492,334 @@
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
     }
-  </style>
+  
+    /* ESTILOS DE LA VISTA DEL ALUMNADO */
+    .app-view { display: none; }
+    .app-view.active { display: block; }
+
+    .hero-alumno {
+      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+      border-bottom: 4px solid #8b5cf6;
+    }
+    .badge-alumno {
+      background: rgba(139, 92, 246, 0.25) !important;
+      border: 1px solid rgba(167, 139, 250, 0.5) !important;
+      color: #c4b5fd !important;
+    }
+    .fill-alumno {
+      background: linear-gradient(90deg, #8b5cf6, #ec4899) !important;
+    }
+    .badge-a {
+      background: #f5f3ff !important;
+      color: #7c3aed !important;
+    }
+    .icon-pup { background: #fef3c7 !important; color: #b45309; }
+    .icon-theory { background: #eff6ff !important; color: #1d4ed8; }
+    .icon-key { background: #ecfdf5 !important; color: #047857; }
+    .icon-game { background: #fdf2f8 !important; color: #be185d; }
+    .icon-fill { background: #fff7ed !important; color: #c2410c; }
+    .icon-quiz { background: #fefce8 !important; color: #a16207; }
+
+    /* FICHAS DE PUPPETS */
+    .cards-interactive-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1rem;
+    }
+    .mini-card-pup {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 1.25rem;
+      position: relative;
+    }
+    .pup-header {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 0.4rem;
+    }
+    .pup-badge-easy {
+      display: inline-block;
+      background: #dcfce7;
+      color: #15803d;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 6px;
+      margin-bottom: 0.6rem;
+    }
+    .pup-badge-mid {
+      display: inline-block;
+      background: #fef3c7;
+      color: #b45309;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 6px;
+      margin-bottom: 0.6rem;
+    }
+    .pup-desc {
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-bottom: 0.8rem;
+    }
+    .pup-checklist {
+      list-style: none;
+      padding: 0;
+      font-size: 0.84rem;
+      color: #334155;
+    }
+    .pup-checklist li {
+      margin-bottom: 0.4rem;
+      line-height: 1.4;
+    }
+
+    /* TEORÍA VISUAL */
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+    .theory-pill {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+      font-size: 0.88rem;
+      color: #334155;
+      line-height: 1.45;
+    }
+    .pill-icon {
+      font-size: 1.3rem;
+      display: block;
+      margin-bottom: 0.35rem;
+    }
+
+    /* SHORTCUTS */
+    .shortcuts-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+    .shortcut-col {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .sh-head {
+      padding: 0.75rem 1rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+    .sh-blender { background: #ea580c; }
+    .sh-dragon { background: #dc2626; }
+    .sh-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+    .sh-table td {
+      padding: 7px 12px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    kbd {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-bottom-width: 2px;
+      padding: 2px 6px;
+      border-radius: 5px;
+      font-family: monospace;
+      font-size: 0.82rem;
+      font-weight: bold;
+      color: #0f172a;
+    }
+
+    /* MINIJUEGO 1: BANCO DE PALABRAS */
+    .word-bank {
+      background: #f8fafc;
+      border: 2px dashed #cbd5e1;
+      border-radius: 12px;
+      padding: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      margin-bottom: 1.5rem;
+      min-height: 52px;
+    }
+    .word-chip {
+      background: #ffffff;
+      border: 2px solid #8b5cf6;
+      color: #6d28d9;
+      font-weight: 700;
+      font-size: 0.88rem;
+      padding: 6px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(139, 92, 246, 0.15);
+      transition: all 0.15s;
+    }
+    .word-chip:hover {
+      background: #f5f3ff;
+      transform: translateY(-2px);
+    }
+    .word-chip.selected {
+      background: #8b5cf6;
+      color: #ffffff;
+    }
+    .word-chip.used {
+      opacity: 0.35;
+      pointer-events: none;
+      border-color: #cbd5e1;
+      color: #94a3b8;
+    }
+    .game-sentence-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 0.9rem 1.1rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.92rem;
+      color: #1e293b;
+      line-height: 1.7;
+    }
+    .word-slot {
+      display: inline-block;
+      min-width: 120px;
+      padding: 2px 10px;
+      border-bottom: 2px solid #3b82f6;
+      background: #eff6ff;
+      color: #1d4ed8;
+      font-weight: 700;
+      border-radius: 6px;
+      text-align: center;
+      cursor: pointer;
+      margin: 0 4px;
+    }
+    .word-slot.filled {
+      background: #dbeafe;
+    }
+
+    /* MINIJUEGO 2: RELLENA HUECOS */
+    .fill-form-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+    .fill-item {
+      margin-bottom: 1.25rem;
+    }
+    .fill-item label {
+      display: block;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 0.4rem;
+    }
+    .fill-input-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .fill-box {
+      padding: 0.6rem 0.9rem;
+      font-size: 0.9rem;
+      border: 2px solid #cbd5e1;
+      border-radius: 8px;
+      outline: none;
+      width: 200px;
+      font-weight: 600;
+    }
+    .fill-box:focus {
+      border-color: #8b5cf6;
+      box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+    }
+    .hint-small {
+      font-size: 0.78rem;
+      color: #94a3b8;
+    }
+
+    /* CUESTIONARIO EVALUABLE */
+    .quiz-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .quiz-q-box {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 1.25rem;
+    }
+    .q-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 0.75rem;
+    }
+    .q-opt {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 0.88rem;
+      color: #334155;
+      cursor: pointer;
+      padding: 6px 10px;
+      border-radius: 8px;
+      transition: background 0.15s;
+    }
+    .q-opt:hover {
+      background: #f8fafc;
+    }
+    .q-opt input {
+      margin-right: 8px;
+    }
+
+    /* CONTROLES Y FEEDBACK COMUNES */
+    .game-feedback-bar {
+      margin-top: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      flex-wrap: wrap;
+    }
+    .ctrl-btn-action {
+      background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+      color: #ffffff;
+      border: none;
+      padding: 0.65rem 1.25rem;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(109, 40, 217, 0.25);
+    }
+    .ctrl-btn-action:hover {
+      transform: translateY(-1px);
+    }
+    .ctrl-btn-reset {
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #cbd5e1;
+      padding: 0.65rem 1rem;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+    }
+    .game-result-text {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-left: 0.5rem;
+    }
+
+</style>
 </head>
 <body>
 
@@ -517,7 +844,7 @@
   </div>
 
   <!-- PLATAFORMA POR BLOQUES -->
-  <div id="content-wrapper">
+  <div id="view-docente" class="app-view">
     <header class="hero-header">
       <span class="hero-badge">34 Sesiones · 10 a 14 Años · Bajo Coste</span>
       <h1>Guía Didáctica: Animación Artesanal y 3D</h1>
@@ -1390,27 +1717,452 @@
     </main>
   </div>
 
+  <!-- VISTA PARA EL ALUMNADO: RUTA DE APRENDIZAJE INTERACTIVA -->
+  <div id="view-alumno" class="app-view">
+    <header class="hero-header hero-alumno">
+      <span class="hero-badge badge-alumno">Zona del Alumnado · Taller de Creación</span>
+      <h1>Estudio de Animación: Modo Alumno</h1>
+      <p class="hero-subtitle">Tu manual interactivo de taller: retos, controles rápidos, minijuegos y cuestionarios para superar cada sesión.</p>
+    </header>
+
+    <main class="container">
+      
+      <!-- CONTROLES SUPERIORES & NIVEL DEL ALUMNO -->
+      <div class="top-controls-bar">
+        <div class="progress-stats">
+          <div class="progress-bar-wrap">
+            <div class="progress-bar-fill fill-alumno" id="progress-fill-alumno"></div>
+          </div>
+          <span class="progress-label" id="progress-text-alumno">1 de 6 Módulos abiertos</span>
+        </div>
+
+        <div class="actions-group">
+          <button class="ctrl-btn" onclick="expandAllAlumno()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="7 13 12 18 17 13"></polyline><polyline points="7 6 12 11 17 6"></polyline></svg>
+            Desplegar Todo
+          </button>
+          <button class="ctrl-btn" onclick="collapseAllAlumno()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="17 11 12 6 7 11"></polyline><polyline points="17 18 12 13 7 18"></polyline></svg>
+            Plegar
+          </button>
+          <a href="Guia_Didactica_Animacion_StopMotion_Blender.pdf" class="ctrl-btn download-btn" download>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            Guía PDF
+          </a>
+        </div>
+      </div>
+
+      <!-- LISTA DE BLOQUES MODULARES DEL ALUMNADO -->
+      <div class="blocks-container">
+
+        <!-- MÓDULO A1: FICHAS DE CONSTRUCCIÓN -->
+        <div class="learning-block block-alumno" id="block-a1" data-block-id="a1">
+          <div class="block-header" onclick="toggleBlockAlumno('a1')">
+            <div class="block-left">
+              <div class="block-status-icon icon-pup">🛠️</div>
+              <div class="block-title-box">
+                <div class="block-tag-row">
+                  <span class="block-badge badge-a">Módulo 1</span>
+                  <span class="block-subtag">Taller Práctico</span>
+                </div>
+                <h3 class="block-title">Fichas de Construcción de Puppets</h3>
+                <p class="block-summary">Paso a paso ilustrado de los 3 modelos, la prueba de los 10 segundos y trucos de contrapeso.</p>
+              </div>
+            </div>
+            <div class="block-right">
+              <button class="toggle-btn" type="button"><span class="btn-text">Ver Módulo</span> <svg class="chevron-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+            </div>
+          </div>
+          <div class="block-content">
+            <div class="block-body-inner">
+              <div class="callout callout-alert">
+                <div>⚖️</div>
+                <div>
+                  <strong>La Prueba de Oro de los 10 Segundos:</strong> Antes de empezar a grabar, suelta tu personaje en la mesa. Si se mantiene quieto 10 segundos sin caerse, ¡está listo! Si tambalea, pon una bola de plastilina en el fondo.
+                </div>
+              </div>
+
+              <div class="cards-interactive-grid">
+                <!-- Tarjeta Puppet 1 -->
+                <div class="mini-card-pup">
+                  <div class="pup-header">📦 Modelo 1: Criatura de la Caja</div>
+                  <div class="pup-badge-easy">Muy Fácil</div>
+                  <p class="pup-desc">Una criatura que vive dentro de una caja de cartón. Su propia caja es cuerpo, escenario y apoyo.</p>
+                  <ul class="pup-checklist">
+                    <li>✅ <strong>Paso 1:</strong> Aplasta plastilina en el fondo interior para hacer contrapeso.</li>
+                    <li>✅ <strong>Paso 2:</strong> Pon cinta de carrocero detrás de la tapa para que haga de bisagra suave.</li>
+                    <li>✅ <strong>Paso 3:</strong> Modela ojos saltones con plastilina o tapones de botella en el borde.</li>
+                    <li>✅ <strong>Paso 4:</strong> Pega dientes de papel y una lengua flexible para asustar o atrapar cosas.</li>
+                  </ul>
+                </div>
+
+                <!-- Tarjeta Puppet 2 -->
+                <div class="mini-card-pup">
+                  <div class="pup-header">🟢 Modelo 2: Monstruo Blob</div>
+                  <div class="pup-badge-easy">Muy Fácil</div>
+                  <p class="pup-desc">Un ser viscoso de plastilina que se arrastra, estira y divide. ¡Nunca tropieza porque no tiene piernas!</p>
+                  <ul class="pup-checklist">
+                    <li>✅ <strong>Paso 1:</strong> Haz una pelota apretada con papel de aluminio para ahorrar plastilina.</li>
+                    <li>✅ <strong>Paso 2:</strong> Forra el aluminio con una capa uniforme de plastilina de color.</li>
+                    <li>✅ <strong>Paso 3:</strong> Aplasta la base contra la mesa para que quede plana y muy estable.</li>
+                    <li>✅ <strong>Paso 4:</strong> Modela 3 bocas sueltas de recambio (cerrada, abierta, sonrisa) para cambiarlas en cada foto.</li>
+                  </ul>
+                </div>
+
+                <!-- Tarjeta Puppet 3 -->
+                <div class="mini-card-pup">
+                  <div class="pup-header">🪴 Modelo 3: Planta Carnívora</div>
+                  <div class="pup-badge-mid">Nivel Medio</div>
+                  <p class="pup-desc">Una planta en maceta que gira y muerde. El vaso de yogur actúa como trípode natural.</p>
+                  <ul class="pup-checklist">
+                    <li>✅ <strong>Paso 1:</strong> Llena un tercio de un vaso de yogur con plastilina pesada para que no vuelque.</li>
+                    <li>✅ <strong>Paso 2:</strong> Clava un tallo corto (pajita o alambre forrado) de máximo 7-8 cm de alto.</li>
+                    <li>✅ <strong>Paso 3:</strong> Construye la cabeza con dos conos de cartulina unidos con cinta trasera.</li>
+                    <li>✅ <strong>Paso 4:</strong> Decora con hojas verdes para tapar las uniones mecánicas.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MÓDULO A2: TEORÍA DE ANIMACIÓN -->
+        <div class="learning-block block-alumno" id="block-a2" data-block-id="a2">
+          <div class="block-header" onclick="toggleBlockAlumno('a2')">
+            <div class="block-left">
+              <div class="block-status-icon icon-theory">🎬</div>
+              <div class="block-title-box">
+                <div class="block-tag-row">
+                  <span class="block-badge badge-a">Módulo 2</span>
+                  <span class="block-subtag">Conceptos Clave</span>
+                </div>
+                <h3 class="block-title">Teoría Visual: El Arte de Dar Vida</h3>
+                <p class="block-summary">¿Qué es el timing, el spacing, el onion skin y cómo planificar con un storyboard?</p>
+              </div>
+            </div>
+            <div class="block-right">
+              <button class="toggle-btn" type="button"><span class="btn-text">Ver Módulo</span> <svg class="chevron-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+            </div>
+          </div>
+          <div class="block-content">
+            <div class="block-body-inner">
+              <div class="theory-grid">
+                <div class="theory-pill">
+                  <span class="pill-icon">🎞️</span>
+                  <strong>Fotograma (Frame):</strong> Cada foto fija. 1 segundo de película suele tener entre 8 y 12 fotos en stop motion escolar.
+                </div>
+                <div class="theory-pill">
+                  <span class="pill-icon">⏱️</span>
+                  <strong>Timing (Tiempo):</strong> Cuántas fotos dura una acción. Si la caja se abre en 3 fotos parecerá un susto rápido; si tarda 30 fotos parecerá sigilosa.
+                </div>
+                <div class="theory-pill">
+                  <span class="pill-icon">📏</span>
+                  <strong>Spacing (Espaciado):</strong> Cuánto mueves el muñeco entre foto y foto. Mover poquito = despacio; saltos grandes = gran velocidad.
+                </div>
+                <div class="theory-pill">
+                  <span class="pill-icon">🧅</span>
+                  <strong>Piel de Cebolla (Onion Skin):</strong> Ver la foto anterior en transparencia como un fantasma para medir exactamente cuánto mover el puppet.
+                </div>
+                <div class="theory-pill">
+                  <span class="pill-icon">📐</span>
+                  <strong>Plano General vs. Primer Plano:</strong> El Plano General sitúa el escenario; el Primer Plano destaca la emoción en los ojos del personaje.
+                </div>
+                <div class="theory-pill">
+                  <span class="pill-icon">🚪</span>
+                  <strong>Transición Híbrida:</strong> El truco narrativo para saltar al 3D: cerrar una caja en real y que se abra dentro del monitor de Blender.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MÓDULO A3: SHORTCUTS BLENDER & DRAGONFRAME -->
+        <div class="learning-block block-alumno" id="block-a3" data-block-id="a3">
+          <div class="block-header" onclick="toggleBlockAlumno('a3')">
+            <div class="block-left">
+              <div class="block-status-icon icon-key">⌨️</div>
+              <div class="block-title-box">
+                <div class="block-tag-row">
+                  <span class="block-badge badge-a">Módulo 3</span>
+                  <span class="block-subtag">Chuleta de Teclado</span>
+                </div>
+                <h3 class="block-title">Atajos de Teclado: Blender & Dragonframe</h3>
+                <p class="block-summary">Los shortcuts indispensables para trabajar rápido y como un profesional en el ordenador.</p>
+              </div>
+            </div>
+            <div class="block-right">
+              <button class="toggle-btn" type="button"><span class="btn-text">Ver Módulo</span> <svg class="chevron-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+            </div>
+          </div>
+          <div class="block-content">
+            <div class="block-body-inner">
+              <div class="shortcuts-container">
+                <!-- Columna Blender -->
+                <div class="shortcut-col">
+                  <div class="sh-head sh-blender">🟠 Blender 3D (Comandos Esenciales)</div>
+                  <table class="sh-table">
+                    <tr><td><kbd>G</kbd></td><td><strong>Grab:</strong> Mover el objeto en la escena</td></tr>
+                    <tr><td><kbd>R</kbd></td><td><strong>Rotate:</strong> Girar el objeto</td></tr>
+                    <tr><td><kbd>S</kbd></td><td><strong>Scale:</strong> Cambiar el tamaño (escalar)</td></tr>
+                    <tr><td><kbd>Shift</kbd> + <kbd>A</kbd></td><td><strong>Add:</strong> Añadir nueva primitiva (cubo, esfera...)</td></tr>
+                    <tr><td><kbd>Shift</kbd> + <kbd>D</kbd></td><td><strong>Duplicate:</strong> Duplicar objeto seleccionado</td></tr>
+                    <tr><td><kbd>I</kbd></td><td><strong>Insert Keyframe:</strong> Guardar posición para animar</td></tr>
+                    <tr><td><kbd>Barra Espacio</kbd></td><td><strong>Play / Pause:</strong> Reproducir animación</td></tr>
+                    <tr><td><kbd>0</kbd> (NumPad)</td><td><strong>Camera:</strong> Mirar por la cámara virtual</td></tr>
+                    <tr><td><kbd>Ctrl</kbd> + <kbd>S</kbd></td><td><strong>Save:</strong> ¡Guardar tu archivo .blend!</td></tr>
+                  </table>
+                </div>
+
+                <!-- Columna Dragonframe / Stop Motion Studio -->
+                <div class="shortcut-col">
+                  <div class="sh-head sh-dragon">🔴 Dragonframe / Stop Motion Studio</div>
+                  <table class="sh-table">
+                    <tr><td><kbd>Enter</kbd> o <kbd>NumPad 3</kbd></td><td><strong>Shoot:</strong> Capturar nuevo fotograma</td></tr>
+                    <tr><td><kbd>NumPad 1</kbd> / <kbd>2</kbd></td><td><strong>Step Back / Forward:</strong> Pasar al fotograma anterior o siguiente</td></tr>
+                    <tr><td><kbd>NumPad 0</kbd> o <kbd>Barra</kbd></td><td><strong>Play:</strong> Reproducir la secuencia capturada</td></tr>
+                    <tr><td><kbd>O</kbd></td><td><strong>Onion Skin:</strong> Activar/Desactivar piel de cebolla</td></tr>
+                    <tr><td><kbd>NumPad 5</kbd></td><td><strong>Live View:</strong> Volver a la vista en directo</td></tr>
+                    <tr><td><kbd>Delete</kbd></td><td><strong>Delete Frame:</strong> Borrar última foto si salió una mano</td></tr>
+                    <tr><td><kbd>H</kbd></td><td><strong>High-Res:</strong> Previsualizar en alta resolución</td></tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MÓDULO A4: MINIJUEGO COMPLETA FRASES -->
+        <div class="learning-block block-alumno" id="block-a4" data-block-id="a4">
+          <div class="block-header" onclick="toggleBlockAlumno('a4')">
+            <div class="block-left">
+              <div class="block-status-icon icon-game">🧩</div>
+              <div class="block-title-box">
+                <div class="block-tag-row">
+                  <span class="block-badge badge-a">Módulo 4</span>
+                  <span class="block-subtag">Minijuego de Palabras</span>
+                </div>
+                <h3 class="block-title">Minijuego: Banco de Palabras Interactivo</h3>
+                <p class="block-summary">Haz clic en las palabras de la caja para completar correctamente las definiciones de animación.</p>
+              </div>
+            </div>
+            <div class="block-right">
+              <button class="toggle-btn" type="button"><span class="btn-text">Ver Módulo</span> <svg class="chevron-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+            </div>
+          </div>
+          <div class="block-content">
+            <div class="block-body-inner">
+              <p style="margin-bottom:1rem; color:#475569;">Arrastra o pulsa sobre las fichas de palabras para colocarlas en los huecos vacíos correspondientes:</p>
+
+              <!-- Banco de palabras -->
+              <div class="word-bank" id="game1-word-bank">
+                <button type="button" class="word-chip" data-word="fotogramas" onclick="selectWordChip(this)">fotogramas</button>
+                <button type="button" class="word-chip" data-word="aluminio" onclick="selectWordChip(this)">aluminio</button>
+                <button type="button" class="word-chip" data-word="keyframes" onclick="selectWordChip(this)">keyframes</button>
+                <button type="button" class="word-chip" data-word="cebolla" onclick="selectWordChip(this)">cebolla</button>
+                <button type="button" class="word-chip" data-word="ratón" onclick="selectWordChip(this)">ratón</button>
+              </div>
+
+              <div class="game-sentences">
+                <div class="game-sentence-card">
+                  1. En stop motion no grabamos vídeo continuo, disparamos fotos individuales llamadas 
+                  <span class="word-slot" data-slot="fotogramas" onclick="clearSlot(this)">[ pulsa aquí ]</span> para crear la ilusión de movimiento.
+                </div>
+                <div class="game-sentence-card">
+                  2. Para que el Monstruo Blob no sea demasiado pesado ni gaste mucha plastilina, creamos un núcleo interior con papel de 
+                  <span class="word-slot" data-slot="aluminio" onclick="clearSlot(this)">[ pulsa aquí ]</span>.
+                </div>
+                <div class="game-sentence-card">
+                  3. La herramienta digital que muestra la foto anterior semitransparente como una sombra se llama piel de 
+                  <span class="word-slot" data-slot="cebolla" onclick="clearSlot(this)">[ pulsa aquí ]</span>.
+                </div>
+                <div class="game-sentence-card">
+                  4. En Blender, los puntos en la línea de tiempo donde guardamos la posición de un objeto se llaman 
+                  <span class="word-slot" data-slot="keyframes" onclick="clearSlot(this)">[ pulsa aquí ]</span>.
+                </div>
+                <div class="game-sentence-card">
+                  5. Para movernos con soltura por el espacio 3D de Blender es imprescindible usar un 
+                  <span class="word-slot" data-slot="ratón" onclick="clearSlot(this)">[ pulsa aquí ]</span> con rueda central.
+                </div>
+              </div>
+
+              <div class="game-feedback-bar">
+                <button type="button" class="ctrl-btn-action" onclick="checkWordGame()">Comprobar Respuestas</button>
+                <button type="button" class="ctrl-btn-reset" onclick="resetWordGame()">Reiniciar Juego</button>
+                <span id="game1-result" class="game-result-text"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MÓDULO A5: MINIJUEGO RELLENA HUECOS -->
+        <div class="learning-block block-alumno" id="block-a5" data-block-id="a5">
+          <div class="block-header" onclick="toggleBlockAlumno('a5')">
+            <div class="block-left">
+              <div class="block-status-icon icon-fill">✏️</div>
+              <div class="block-title-box">
+                <div class="block-tag-row">
+                  <span class="block-badge badge-a">Módulo 5</span>
+                  <span class="block-subtag">Desafío de Escritura</span>
+                </div>
+                <h3 class="block-title">Minijuego: Rellena los Huecos Secretos</h3>
+                <p class="block-summary">Demuestra que te sabes los trucos del rodaje y las reglas de estabilidad completando los huecos.</p>
+              </div>
+            </div>
+            <div class="block-right">
+              <button class="toggle-btn" type="button"><span class="btn-text">Ver Módulo</span> <svg class="chevron-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+            </div>
+          </div>
+          <div class="block-content">
+            <div class="block-body-inner">
+              <div class="fill-form-card">
+                <div class="fill-item">
+                  <label>1. La prueba de estabilidad del puppet dura exactamente:</label>
+                  <div class="fill-input-row">
+                    <input type="text" class="fill-box" id="fill-1" placeholder="¿Cuántos segundos?">
+                    <span class="hint-small">(Escribe el número o palabra)</span>
+                  </div>
+                </div>
+
+                <div class="fill-item">
+                  <label>2. Para duplicar una pieza en Blender usamos la combinación de teclas Shift + :</label>
+                  <div class="fill-input-row">
+                    <input type="text" class="fill-box" id="fill-2" placeholder="Letra...">
+                    <span class="hint-small">(Una sola letra)</span>
+                  </div>
+                </div>
+
+                <div class="fill-item">
+                  <label>3. En el set de rodaje, el rol encargado de mover el puppet milímetro a milímetro es:</label>
+                  <div class="fill-input-row">
+                    <input type="text" class="fill-box" id="fill-3" placeholder="Nombre del rol...">
+                    <span class="hint-small">(Empieza por A...)</span>
+                  </div>
+                </div>
+
+                <div class="fill-item">
+                  <label>4. La tecla de Blender para escalar (hacer más grande o pequeño) un objeto es:</label>
+                  <div class="fill-input-row">
+                    <input type="text" class="fill-box" id="fill-4" placeholder="Tecla...">
+                    <span class="hint-small">(Una sola letra)</span>
+                  </div>
+                </div>
+
+                <div class="game-feedback-bar">
+                  <button type="button" class="ctrl-btn-action" onclick="checkFillGame()">Verificar Huecos</button>
+                  <button type="button" class="ctrl-btn-reset" onclick="resetFillGame()">Borrar</button>
+                  <span id="game2-result" class="game-result-text"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MÓDULO A6: CUESTIONARIO EVALUABLE CON NOTA -->
+        <div class="learning-block block-alumno" id="block-a6" data-block-id="a6">
+          <div class="block-header" onclick="toggleBlockAlumno('a6')">
+            <div class="block-left">
+              <div class="block-status-icon icon-quiz">🏆</div>
+              <div class="block-title-box">
+                <div class="block-tag-row">
+                  <span class="block-badge badge-a">Módulo 6</span>
+                  <span class="block-subtag">Evaluación Rápida</span>
+                </div>
+                <h3 class="block-title">Test de Autoevaluación del Alumnado</h3>
+                <p class="block-summary">Responde a las 4 preguntas tipo test para comprobar tu nota final y aptitud para el rodaje.</p>
+              </div>
+            </div>
+            <div class="block-right">
+              <button class="toggle-btn" type="button"><span class="btn-text">Ver Módulo</span> <svg class="chevron-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+            </div>
+          </div>
+          <div class="block-content">
+            <div class="block-body-inner">
+              <div class="quiz-container">
+                <!-- Pregunta 1 -->
+                <div class="quiz-q-box" data-q="1">
+                  <div class="q-title">1. ¿Qué debemos hacer si nuestro puppet de stop motion se tambalea al soltarlo?</div>
+                  <label class="q-opt"><input type="radio" name="q1" value="a"> Grabar muy rápido antes de que se caiga.</label>
+                  <label class="q-opt"><input type="radio" name="q1" value="b"> Añadir peso o base más ancha con plastilina en la parte inferior.</label>
+                  <label class="q-opt"><input type="radio" name="q1" value="c"> Sujetarlo con un dedo dentro del plano de cámara.</label>
+                </div>
+
+                <!-- Pregunta 2 -->
+                <div class="quiz-q-box" data-q="2">
+                  <div class="q-title">2. ¿Por qué se trabaja Blender de forma individual en el aula de informática?</div>
+                  <label class="q-opt"><input type="radio" name="q2" value="a"> Porque el 3D se aprende practicando cada uno con el ratón y los ejes cartesianos.</label>
+                  <label class="q-opt"><input type="radio" name="q2" value="b"> Porque no se permite hablar en el aula de ordenadores.</label>
+                  <label class="q-opt"><input type="radio" name="q2" value="c"> Porque los ordenadores no soportan más de un usuario a la vez.</label>
+                </div>
+
+                <!-- Pregunta 3 -->
+                <div class="quiz-q-box" data-q="3">
+                  <div class="q-title">3. ¿Qué ocurre si movemos la cámara accidentalmente durante el rodaje de una toma?</div>
+                  <label class="q-opt"><input type="radio" name="q1" value="a" style="display:none"></label>
+                  <label class="q-opt"><input type="radio" name="q3" value="a"> Queda un efecto de temblor profesional.</label>
+                  <label class="q-opt"><input type="radio" name="q3" value="b"> Se rompe la continuidad visual y se nota un salto brusco e incómodo.</label>
+                  <label class="q-opt"><input type="radio" name="q3" value="c"> Se borran automáticamente los fotogramas anteriores.</label>
+                </div>
+
+                <!-- Pregunta 4 -->
+                <div class="quiz-q-box" data-q="4">
+                  <div class="q-title">4. En un corto híbrido, ¿qué es la "transición"?</div>
+                  <label class="q-opt"><input type="radio" name="q4" value="a"> Los títulos de crédito al final de la película.</label>
+                  <label class="q-opt"><input type="radio" name="q4" value="b"> El momento donde el personaje pasa del mundo real de cartón al mundo digital en 3D.</label>
+                  <label class="q-opt"><input type="radio" name="q4" value="c"> El tiempo que tarda el ordenador en encenderse.</label>
+                </div>
+
+                <div class="game-feedback-bar">
+                  <button type="button" class="ctrl-btn-action" onclick="submitQuiz()">Calcular Mi Nota</button>
+                  <button type="button" class="ctrl-btn-reset" onclick="resetQuiz()">Reintentar Test</button>
+                  <span id="quiz-result" class="game-result-text"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+
+  
   <script>
+    let activeWordChip = null;
+
     document.addEventListener("DOMContentLoaded", function () {
       const modal = document.getElementById("access-modal-overlay");
-      const wrapper = document.getElementById("content-wrapper");
+      const viewDocente = document.getElementById("view-docente");
+      const viewAlumno = document.getElementById("view-alumno");
       const input = document.getElementById("access-code-input");
       const btn = document.getElementById("unlock-btn");
       const errorMsg = document.getElementById("access-error");
 
-      const validCodes = ["blender2026", "animacion", "stopmotion", "docente", "1234"];
+      const docenteCodes = ["blender2026", "animacion", "stopmotion", "docente", "1234"];
+      const alumnoCodes = ["alumno", "alumnos", "estudiante", "estudiantes"];
 
       function checkCode() {
         const val = input.value.trim().toLowerCase();
-        if (validCodes.includes(val)) {
+        
+        if (docenteCodes.includes(val)) {
+          // Desbloquear MODO DOCENTE
           modal.style.transition = "opacity 0.3s ease, transform 0.3s ease";
           modal.style.opacity = "0";
           modal.style.transform = "scale(1.05)";
           setTimeout(() => {
             modal.style.display = "none";
-            wrapper.classList.add("unlocked");
-            // Abrir el Bloque 1 por defecto
+            viewDocente.classList.add("active");
             openBlock("b1");
+          }, 300);
+        } else if (alumnoCodes.includes(val)) {
+          // Desbloquear MODO ALUMNO
+          modal.style.transition = "opacity 0.3s ease, transform 0.3s ease";
+          modal.style.opacity = "0";
+          modal.style.transform = "scale(1.05)";
+          setTimeout(() => {
+            modal.style.display = "none";
+            viewAlumno.classList.add("active");
+            openBlockAlumno("a1");
           }, 300);
         } else {
           errorMsg.style.display = "block";
@@ -1431,9 +2183,10 @@
       });
     });
 
+    // FUNCIONES VISTA DOCENTE
     function updateProgress() {
-      const total = document.querySelectorAll(".learning-block").length;
-      const opened = document.querySelectorAll(".learning-block.open").length;
+      const total = document.querySelectorAll("#view-docente .learning-block").length;
+      const opened = document.querySelectorAll("#view-docente .learning-block.open").length;
       const pct = Math.round((opened / total) * 100);
       document.getElementById("progress-fill").style.width = pct + "%";
       document.getElementById("progress-text").textContent = opened + " de " + total + " Bloques abiertos";
@@ -1441,8 +2194,7 @@
 
     function toggleBlock(id) {
       const block = document.getElementById("block-" + id);
-      const isAlreadyOpen = block.classList.contains("open");
-      if (isAlreadyOpen) {
+      if (block.classList.contains("open")) {
         block.classList.remove("open");
         block.querySelector(".btn-text").textContent = "Ver Bloque";
       } else {
@@ -1462,7 +2214,7 @@
     }
 
     function expandAllBlocks() {
-      document.querySelectorAll(".learning-block").forEach(b => {
+      document.querySelectorAll("#view-docente .learning-block").forEach(b => {
         b.classList.add("open");
         b.querySelector(".btn-text").textContent = "Plegar";
       });
@@ -1470,12 +2222,202 @@
     }
 
     function collapseAllBlocks() {
-      document.querySelectorAll(".learning-block").forEach(b => {
+      document.querySelectorAll("#view-docente .learning-block").forEach(b => {
         b.classList.remove("open");
         b.querySelector(".btn-text").textContent = "Ver Bloque";
       });
       updateProgress();
     }
+
+    // FUNCIONES VISTA ALUMNO
+    function updateProgressAlumno() {
+      const total = document.querySelectorAll("#view-alumno .learning-block").length;
+      const opened = document.querySelectorAll("#view-alumno .learning-block.open").length;
+      const pct = Math.round((opened / total) * 100);
+      document.getElementById("progress-fill-alumno").style.width = pct + "%";
+      document.getElementById("progress-text-alumno").textContent = opened + " de " + total + " Módulos abiertos";
+    }
+
+    function toggleBlockAlumno(id) {
+      const block = document.getElementById("block-" + id);
+      if (block.classList.contains("open")) {
+        block.classList.remove("open");
+        block.querySelector(".btn-text").textContent = "Ver Módulo";
+      } else {
+        block.classList.add("open");
+        block.querySelector(".btn-text").textContent = "Plegar";
+      }
+      updateProgressAlumno();
+    }
+
+    function openBlockAlumno(id) {
+      const block = document.getElementById("block-" + id);
+      if (block && !block.classList.contains("open")) {
+        block.classList.add("open");
+        block.querySelector(".btn-text").textContent = "Plegar";
+        updateProgressAlumno();
+      }
+    }
+
+    function expandAllAlumno() {
+      document.querySelectorAll("#view-alumno .learning-block").forEach(b => {
+        b.classList.add("open");
+        b.querySelector(".btn-text").textContent = "Plegar";
+      });
+      updateProgressAlumno();
+    }
+
+    function collapseAllAlumno() {
+      document.querySelectorAll("#view-alumno .learning-block").forEach(b => {
+        b.classList.remove("open");
+        b.querySelector(".btn-text").textContent = "Ver Módulo";
+      });
+      updateProgressAlumno();
+    }
+
+    // MINIJUEGO 1: BANCO DE PALABRAS
+    function selectWordChip(chip) {
+      if (chip.classList.contains("used")) return;
+      document.querySelectorAll(".word-chip").forEach(c => c.classList.remove("selected"));
+      chip.classList.add("selected");
+      activeWordChip = chip;
+    }
+
+    function clearSlot(slot) {
+      if (activeWordChip) {
+        // Colocar palabra seleccionada
+        const previousWord = slot.getAttribute("data-current");
+        if (previousWord) {
+          const oldChip = document.querySelector(`.word-chip[data-word="${previousWord}"]`);
+          if (oldChip) oldChip.classList.remove("used");
+        }
+        slot.textContent = activeWordChip.getAttribute("data-word");
+        slot.setAttribute("data-current", activeWordChip.getAttribute("data-word"));
+        slot.classList.add("filled");
+        activeWordChip.classList.add("used");
+        activeWordChip.classList.remove("selected");
+        activeWordChip = null;
+      } else {
+        // Desocupar ranura
+        const currentWord = slot.getAttribute("data-current");
+        if (currentWord) {
+          const chip = document.querySelector(`.word-chip[data-word="${currentWord}"]`);
+          if (chip) chip.classList.remove("used");
+          slot.textContent = "[ pulsa aquí ]";
+          slot.removeAttribute("data-current");
+          slot.classList.remove("filled");
+        }
+      }
+    }
+
+    function checkWordGame() {
+      const slots = document.querySelectorAll(".word-slot");
+      let correct = 0;
+      slots.forEach(s => {
+        if (s.getAttribute("data-current") === s.getAttribute("data-slot")) {
+          correct++;
+          s.style.backgroundColor = "#dcfce7";
+          s.style.color = "#15803d";
+        } else {
+          s.style.backgroundColor = "#fee2e2";
+          s.style.color = "#b91c1c";
+        }
+      });
+      const res = document.getElementById("game1-result");
+      if (correct === slots.length) {
+        res.innerHTML = "🎉 ¡Perfecto! " + correct + "/5 aciertos. ¡Tienes el concepto dominado!";
+        res.style.color = "#15803d";
+      } else {
+        res.innerHTML = "⚠️ " + correct + "/" + slots.length + " correctas. Revisa las marcadas en rojo.";
+        res.style.color = "#b45309";
+      }
+    }
+
+    function resetWordGame() {
+      document.querySelectorAll(".word-slot").forEach(s => {
+        s.textContent = "[ pulsa aquí ]";
+        s.removeAttribute("data-current");
+        s.classList.remove("filled");
+        s.style.backgroundColor = "#eff6ff";
+        s.style.color = "#1d4ed8";
+      });
+      document.querySelectorAll(".word-chip").forEach(c => {
+        c.classList.remove("used", "selected");
+      });
+      activeWordChip = null;
+      document.getElementById("game1-result").textContent = "";
+    }
+
+    // MINIJUEGO 2: RELLENA HUECOS
+    function checkFillGame() {
+      const v1 = document.getElementById("fill-1").value.trim().toLowerCase();
+      const v2 = document.getElementById("fill-2").value.trim().toUpperCase();
+      const v3 = document.getElementById("fill-3").value.trim().toLowerCase();
+      const v4 = document.getElementById("fill-4").value.trim().toUpperCase();
+
+      let points = 0;
+      if (v1 === "10" || v1 === "diez") points++;
+      if (v2 === "D") points++;
+      if (v3 === "animador" || v3 === "animacion" || v3 === "animación" || v3 === "animadora") points++;
+      if (v4 === "S") points++;
+
+      const res = document.getElementById("game2-result");
+      if (points === 4) {
+        res.innerHTML = "🌟 ¡Genial! 4/4 huecos correctos. ¡Todo un pro!";
+        res.style.color = "#15803d";
+      } else {
+        res.innerHTML = "Puntuación: " + points + "/4. Pistas: (1: 10, 2: D, 3: Animador/a, 4: S).";
+        res.style.color = "#b45309";
+      }
+    }
+
+    function resetFillGame() {
+      document.getElementById("fill-1").value = "";
+      document.getElementById("fill-2").value = "";
+      document.getElementById("fill-3").value = "";
+      document.getElementById("fill-4").value = "";
+      document.getElementById("game2-result").textContent = "";
+    }
+
+    // CUESTIONARIO EVALUABLE
+    function submitQuiz() {
+      const answers = { q1: "b", q2: "a", q3: "b", q4: "b" };
+      let score = 0;
+      let answered = 0;
+
+      for (let k in answers) {
+        const sel = document.querySelector(`input[name="${k}"]:checked`);
+        if (sel) {
+          answered++;
+          if (sel.value === answers[k]) score++;
+        }
+      }
+
+      const res = document.getElementById("quiz-result");
+      if (answered < 4) {
+        res.innerHTML = "⚠️ Responde a las 4 preguntas antes de calificar.";
+        res.style.color = "#dc2626";
+        return;
+      }
+
+      const grade = (score / 4) * 10;
+      if (grade >= 7.5) {
+        res.innerHTML = `🏆 ¡Nota: ${grade}/10! Apto para el set de rodaje y Blender.`;
+        res.style.color = "#15803d";
+      } else if (grade >= 5) {
+        res.innerHTML = `👍 Aprobado con ${grade}/10. Repasa los módulos de teoría.`;
+        res.style.color = "#b45309";
+      } else {
+        res.innerHTML = `❌ Nota: ${grade}/10. Te recomendamos repasar los apuntes.`;
+        res.style.color = "#dc2626";
+      }
+    }
+
+    function resetQuiz() {
+      document.querySelectorAll(".quiz-q-box input[type='radio']").forEach(r => r.checked = false);
+      document.getElementById("quiz-result").textContent = "";
+    }
   </script>
+
 </body>
 </html>

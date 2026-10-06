@@ -1049,28 +1049,7 @@
 
       <!-- LISTA DE BLOQUES MODULARES -->
       
-      <!-- PANEL DE CONTROL DOCENTE: CALIFICACIONES DEL ALUMNADO -->
-      <div class="learning-block docente-tracker-card" id="block-docente-scores">
-        <div class="docente-tracker-header">
-          <div class="tracker-badge-row">
-            <span class="tracker-live-tag">● Modo Profesor Activo</span>
-            <span class="tracker-subtag">Panel de Evaluación de Aula</span>
-          </div>
-          <h2 style="font-size:1.45rem; color:#0f172a; margin: 0.3rem 0 0.5rem 0;">📊 Calificaciones y Evaluaciones del Alumnado</h2>
-          <p style="color:#64748b; font-size:0.92rem; margin-bottom: 1.25rem;">Supervisión en tiempo real de los 3 bloques de examen (máx. 2 intentos por prueba). Selecciona un alumno para desglosar sus aciertos y notas:</p>
-
-          <div class="tracker-controls-row">
-            <div class="select-group">
-              <label for="select-student-view" style="font-weight:600; font-size:0.88rem; color:#334155;">Seleccionar Alumno/a:</label>
-              <select id="select-student-view" class="student-dropdown" onchange="renderStudentReport()">
-                <!-- Opciones generadas por JS alumno01 .. alumno30 -->
-              </select>
-            </div>
-            <div class="tracker-btn-group">
-              <button type="button" class="ctrl-btn-action" onclick="refreshStudentData()">🔄 Actualizar Datos</button>
-              <button type="button" class="ctrl-btn-reset" onclick="resetAllScoresConfirm()">🗑️ Reiniciar Notas</button>
-            </div>
-          </div>
+      
         </div>
 
         <div id="student-report-box" class="student-report-box">
@@ -1948,11 +1927,212 @@
       </div>
 
       <div class="blocks-container">
+<!-- MÓDULO A1: FICHAS DE CONSTRUCCIÓN -->
+        <div class="learning-block block-alumno" id="block-a1" data-block-id="a1">
+          <div class="block-header" onclick="toggleBlockAlumno('a1')">
+            <div class="block-left">
+              <div class="block-status-icon icon-pup">🛠️</div>
+              <div class="block-title-box">
+                <div class="block-tag-row">
+                  <span class="block-badge badge-a">Módulo 1</span>
+                  <span class="block-subtag">Taller Práctico</span>
+                </div>
+                <h3 class="block-title">Fichas de Construcción de Puppets</h3>
+                <p class="block-summary">Paso a paso ilustrado de los 3 modelos, la prueba de los 10 segundos y trucos de contrapeso.</p>
+              </div>
+            </div>
+            <div class="block-right">
+              <button class="toggle-btn" type="button"><span class="btn-text">Ver Módulo</span> <svg class="chevron-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+            </div>
+          </div>
+          <div class="block-content">
+            <div class="block-body-inner">
+              <div class="callout callout-alert">
+                <div>⚖️</div>
+                <div>
+                  <strong>La Prueba de Oro de los 10 Segundos:</strong> Antes de empezar a grabar, suelta tu personaje en la mesa. Si se mantiene quieto 10 segundos sin caerse, ¡está listo! Si tambalea, pon una bola de plastilina en el fondo.
+                </div>
+              </div>
 
-        <!-- ==========================================
-             BLOQUE 1: SESIONES 1 A 12 (STOP MOTION & PUPPETS)
-             ========================================== -->
-        <div class="learning-block block-alumno open" id="block-b1-exam">
+              <div class="cards-interactive-grid">
+                <!-- Tarjeta Puppet 1 -->
+                <div class="mini-card-pup">
+                  <div class="pup-header">📦 Modelo 1: Criatura de la Caja</div>
+                  <div class="pup-badge-easy">Muy Fácil</div>
+                  <p class="pup-desc">Una criatura que vive dentro de una caja de cartón. Su propia caja es cuerpo, escenario y apoyo.</p>
+                  <ul class="pup-checklist">
+                    <li>✅ <strong>Paso 1:</strong> Aplasta plastilina en el fondo interior para hacer contrapeso.</li>
+                    <li>✅ <strong>Paso 2:</strong> Pon cinta de carrocero detrás de la tapa para que haga de bisagra suave.</li>
+                    <li>✅ <strong>Paso 3:</strong> Modela ojos saltones con plastilina o tapones de botella en el borde.</li>
+                    <li>✅ <strong>Paso 4:</strong> Pega dientes de papel y una lengua flexible para asustar o atrapar cosas.</li>
+                  </ul>
+                </div>
+
+                <!-- Tarjeta Puppet 2 -->
+                <div class="mini-card-pup">
+                  <div class="pup-header">🟢 Modelo 2: Monstruo Blob</div>
+                  <div class="pup-badge-easy">Muy Fácil</div>
+                  <p class="pup-desc">Un ser viscoso de plastilina que se arrastra, estira y divide. ¡Nunca tropieza porque no tiene piernas!</p>
+                  <ul class="pup-checklist">
+                    <li>✅ <strong>Paso 1:</strong> Haz una pelota apretada con papel de aluminio para ahorrar plastilina.</li>
+                    <li>✅ <strong>Paso 2:</strong> Forra el aluminio con una capa uniforme de plastilina de color.</li>
+                    <li>✅ <strong>Paso 3:</strong> Aplasta la base contra la mesa para que quede plana y muy estable.</li>
+                    <li>✅ <strong>Paso 4:</strong> Modela 3 bocas sueltas de recambio (cerrada, abierta, sonrisa) para cambiarlas en cada foto.</li>
+                  </ul>
+                </div>
+
+                <!-- Tarjeta Puppet 3 -->
+                <div class="mini-card-pup">
+                  <div class="pup-header">🪴 Modelo 3: Planta Carnívora</div>
+                  <div class="pup-badge-mid">Nivel Medio</div>
+                  <p class="pup-desc">Una planta en maceta que gira y muerde. El vaso de yogur actúa como trípode natural.</p>
+                  <ul class="pup-checklist">
+                    <li>✅ <strong>Paso 1:</strong> Llena un tercio de un vaso de yogur con plastilina pesada para que no vuelque.</li>
+                    <li>✅ <strong>Paso 2:</strong> Clava un tallo corto (pajita o alambre forrado) de máximo 7-8 cm de alto.</li>
+                    <li>✅ <strong>Paso 3:</strong> Construye la cabeza con dos conos de cartulina unidos con cinta trasera.</li>
+                    <li>✅ <strong>Paso 4:</strong> Decora con hojas verdes para tapar las uniones mecánicas.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MÓDULO A2: TEORÍA DE ANIMACIÓN -->
+        <div class="learning-block block-alumno" id="block-a2" data-block-id="a2">
+          <div class="block-header" onclick="toggleBlockAlumno('a2')">
+            <div class="block-left">
+              <div class="block-status-icon icon-theory">🎬</div>
+              <div class="block-title-box">
+                <div class="block-tag-row">
+                  <span class="block-badge badge-a">Módulo 2</span>
+                  <span class="block-subtag">Conceptos Clave</span>
+                </div>
+                <h3 class="block-title">Teoría Visual: El Arte de Dar Vida</h3>
+                <p class="block-summary">¿Qué es el timing, el spacing, el onion skin y cómo planificar con un storyboard?</p>
+              </div>
+            </div>
+            <div class="block-right">
+              <button class="toggle-btn" type="button"><span class="btn-text">Ver Módulo</span> <svg class="chevron-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+            </div>
+          </div>
+          <div class="block-content">
+            <div class="block-body-inner">
+              <div class="theory-grid">
+                <div class="theory-pill">
+                  <span class="pill-icon">🎞️</span>
+                  <strong>Fotograma (Frame):</strong> Cada foto fija. 1 segundo de película suele tener entre 8 y 12 fotos en stop motion escolar.
+                </div>
+                <div class="theory-pill">
+                  <span class="pill-icon">⏱️</span>
+                  <strong>Timing (Tiempo):</strong> Cuántas fotos dura una acción. Si la caja se abre en 3 fotos parecerá un susto rápido; si tarda 30 fotos parecerá sigilosa.
+                </div>
+                <div class="theory-pill">
+                  <span class="pill-icon">📏</span>
+                  <strong>Spacing (Espaciado):</strong> Cuánto mueves el muñeco entre foto y foto. Mover poquito = despacio; saltos grandes = gran velocidad.
+                </div>
+                <div class="theory-pill">
+                  <span class="pill-icon">🧅</span>
+                  <strong>Piel de Cebolla (Onion Skin):</strong> Ver la foto anterior en transparencia como un fantasma para medir exactamente cuánto mover el puppet.
+                </div>
+                <div class="theory-pill">
+                  <span class="pill-icon">📐</span>
+                  <strong>Plano General vs. Primer Plano:</strong> El Plano General sitúa el escenario; el Primer Plano destaca la emoción en los ojos del personaje.
+                </div>
+                <div class="theory-pill">
+                  <span class="pill-icon">🚪</span>
+                  <strong>Transición Híbrida:</strong> El truco narrativo para saltar al 3D: cerrar una caja en real y que se abra dentro del monitor de Blender.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MÓDULO A3: SHORTCUTS BLENDER & DRAGONFRAME -->
+        <div class="learning-block block-alumno" id="block-a3" data-block-id="a3">
+          <div class="block-header" onclick="toggleBlockAlumno('a3')">
+            <div class="block-left">
+              <div class="block-status-icon icon-key">⌨️</div>
+              <div class="block-title-box">
+                <div class="block-tag-row">
+                  <span class="block-badge badge-a">Módulo 3</span>
+                  <span class="block-subtag">Chuleta de Teclado</span>
+                </div>
+                <h3 class="block-title">Atajos de Teclado: Blender & Dragonframe</h3>
+                <p class="block-summary">Los shortcuts indispensables para trabajar rápido y como un profesional en el ordenador.</p>
+              </div>
+            </div>
+            <div class="block-right">
+              <button class="toggle-btn" type="button"><span class="btn-text">Ver Módulo</span> <svg class="chevron-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+            </div>
+          </div>
+          <div class="block-content">
+            <div class="block-body-inner">
+              <div class="shortcuts-container">
+                <!-- Columna Blender -->
+                <div class="shortcut-col">
+                  <div class="sh-head sh-blender">🟠 Blender 3D (Comandos Esenciales)</div>
+                  <table class="sh-table">
+                    <tr><td><kbd>G</kbd></td><td><strong>Grab:</strong> Mover el objeto en la escena</td></tr>
+                    <tr><td><kbd>R</kbd></td><td><strong>Rotate:</strong> Girar el objeto</td></tr>
+                    <tr><td><kbd>S</kbd></td><td><strong>Scale:</strong> Cambiar el tamaño (escalar)</td></tr>
+                    <tr><td><kbd>Shift</kbd> + <kbd>A</kbd></td><td><strong>Add:</strong> Añadir nueva primitiva (cubo, esfera...)</td></tr>
+                    <tr><td><kbd>Shift</kbd> + <kbd>D</kbd></td><td><strong>Duplicate:</strong> Duplicar objeto seleccionado</td></tr>
+                    <tr><td><kbd>I</kbd></td><td><strong>Insert Keyframe:</strong> Guardar posición para animar</td></tr>
+                    <tr><td><kbd>Barra Espacio</kbd></td><td><strong>Play / Pause:</strong> Reproducir animación</td></tr>
+                    <tr><td><kbd>0</kbd> (NumPad)</td><td><strong>Camera:</strong> Mirar por la cámara virtual</td></tr>
+                    <tr><td><kbd>Ctrl</kbd> + <kbd>S</kbd></td><td><strong>Save:</strong> ¡Guardar tu archivo .blend!</td></tr>
+                  </table>
+                </div>
+
+                <!-- Columna Dragonframe / Stop Motion Studio -->
+                <div class="shortcut-col">
+                  <div class="sh-head sh-dragon">🔴 Dragonframe / Stop Motion Studio</div>
+                  <table class="sh-table">
+                    <tr><td><kbd>Enter</kbd> o <kbd>NumPad 3</kbd></td><td><strong>Shoot:</strong> Capturar nuevo fotograma</td></tr>
+                    <tr><td><kbd>NumPad 1</kbd> / <kbd>2</kbd></td><td><strong>Step Back / Forward:</strong> Pasar al fotograma anterior o siguiente</td></tr>
+                    <tr><td><kbd>NumPad 0</kbd> o <kbd>Barra</kbd></td><td><strong>Play:</strong> Reproducir la secuencia capturada</td></tr>
+                    <tr><td><kbd>O</kbd></td><td><strong>Onion Skin:</strong> Activar/Desactivar piel de cebolla</td></tr>
+                    <tr><td><kbd>NumPad 5</kbd></td><td><strong>Live View:</strong> Volver a la vista en directo</td></tr>
+                    <tr><td><kbd>Delete</kbd></td><td><strong>Delete Frame:</strong> Borrar última foto si salió una mano</td></tr>
+                    <tr><td><kbd>H</kbd></td><td><strong>High-Res:</strong> Previsualizar en alta resolución</td></tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        
+
+
+        <!-- MACRO-BLOQUE FINAL EVALUATIVO PLEGABLE: LAS 3 EVALUACIONES Y SUS 15 JUEGOS -->
+        <div class="learning-block block-alumno macro-eval-block open" id="block-macro-evaluaciones">
+          <div class="block-header" onclick="toggleMacroEvaluaciones()">
+            <div class="block-left">
+              <div class="block-status-icon icon-quiz" style="background:#fefce8; color:#a16207;">🏆</div>
+              <div class="block-title-box">
+                <div class="block-tag-row">
+                  <span class="block-badge badge-a">Evaluación Oficial</span>
+                  <span class="block-subtag">Exámenes Interactivos del Curso</span>
+                </div>
+                <h3 class="block-title">Bloque de Evaluaciones: Los 3 Bloques de Examen</h3>
+                <p class="block-summary">Aquí se concentran los 3 exámenes por sesiones (15 juegos evaluables en total, máx. 2 intentos por prueba).</p>
+              </div>
+            </div>
+            <div class="block-right">
+              <button class="toggle-btn" type="button" id="btn-toggle-macro">
+                <span class="btn-text">Plegar Exámenes</span>
+                <svg class="chevron-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="block-content" id="macro-eval-content" style="display:block;">
+            <div class="block-body-inner" style="background:#f1f5f9; border-radius:12px; padding:1.5rem;">
+              <p style="margin-bottom:1.5rem; color:#475569; font-weight:500;">Haz clic en cada bloque de examen para desplegar y realizar sus 5 pruebas interactivas:</p>
+              
+              <div class="learning-block block-alumno open" id="block-b1-exam">
           <div class="block-header" onclick="toggleExamBlock('b1')">
             <div class="block-left">
               <div class="block-status-icon icon-pup">📦</div>
@@ -2119,13 +2299,8 @@
 
             </div>
           </div>
-        </div>
 
-
-        <!-- ==========================================
-             BLOQUE 2: SESIONES 13 A 24 (BLENDER 3D & DRAGONFRAME)
-             ========================================== -->
-        <div class="learning-block block-alumno" id="block-b2-exam">
+<div class="learning-block block-alumno" id="block-b2-exam">
           <div class="block-header" onclick="toggleExamBlock('b2')">
             <div class="block-left">
               <div class="block-status-icon icon-key">💻</div>
@@ -2283,13 +2458,8 @@
 
             </div>
           </div>
-        </div>
 
-
-        <!-- ==========================================
-             BLOQUE 3: SESIONES 25 A 34 (PROYECTO FINAL HÍBRIDO & MONTAJE)
-             ========================================== -->
-        <div class="learning-block block-alumno" id="block-b3-exam">
+<div class="learning-block block-alumno" id="block-b3-exam">
           <div class="block-header" onclick="toggleExamBlock('b3')">
             <div class="block-left">
               <div class="block-status-icon icon-game">🎬</div>
@@ -2447,8 +2617,11 @@
 
             </div>
           </div>
-        </div>
 
+            </div>
+          </div>
+        </div>
+    
       </div>
     </main>
   </div>
@@ -2867,6 +3040,56 @@
         alert("Calificaciones reiniciadas correctamente.");
       }
     }
+  
+    // PLEGADO DEL PANEL DE CALIFICACIONES DOCENTE (AL FINAL)
+    function toggleDocenteTracker() {
+      const card = document.getElementById("block-docente-scores");
+      const content = document.getElementById("tracker-body-content");
+      const btnText = document.querySelector("#btn-toggle-tracker .btn-text");
+      if (content.style.display === "none") {
+        content.style.display = "block";
+        card.classList.add("open");
+        if (btnText) btnText.textContent = "Plegar Panel";
+      } else {
+        content.style.display = "none";
+        card.classList.remove("open");
+        if (btnText) btnText.textContent = "Ver Calificaciones";
+      }
+    }
+
+    // PLEGADO DEL MACRO-BLOQUE FINAL DE EVALUACIONES EN ALUMNOS
+    function toggleMacroEvaluaciones() {
+      const card = document.getElementById("block-macro-evaluaciones");
+      const content = document.getElementById("macro-eval-content");
+      const btnText = document.querySelector("#btn-toggle-macro .btn-text");
+      if (content.style.display === "none") {
+        content.style.display = "block";
+        card.classList.add("open");
+        if (btnText) btnText.textContent = "Plegar Exámenes";
+      } else {
+        content.style.display = "none";
+        card.classList.remove("open");
+        if (btnText) btnText.textContent = "Abrir Exámenes";
+      }
+    }
+
+    // PLEGADO DE MÓDULOS DE MATERIAL DEL ALUMNADO (Fichas, Teoría, Shortcuts)
+    function toggleBlockAlumno(id) {
+      const block = document.getElementById("block-" + id);
+      if (!block) return;
+      const content = block.querySelector(".block-content");
+      const btnText = block.querySelector(".btn-text");
+      if (content.style.display === "none" || !block.classList.contains("open")) {
+        content.style.display = "block";
+        block.classList.add("open");
+        if (btnText) btnText.textContent = "Plegar";
+      } else {
+        content.style.display = "none";
+        block.classList.remove("open");
+        if (btnText) btnText.textContent = "Ver Módulo";
+      }
+    }
+
   </script>
 
 

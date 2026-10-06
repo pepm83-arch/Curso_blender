@@ -494,8 +494,8 @@
     }
   
     /* ESTILOS DE LA VISTA DEL ALUMNADO */
-    .app-view { display: none; }
-    .app-view.active { display: block; }
+    .app-view { display: none !important; }
+    .app-view.active { display: block !important; }
 
     .hero-alumno {
       background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
@@ -1927,7 +1927,7 @@
       </div>
 
       <div class="blocks-container">
-<!-- MÓDULO A1: FICHAS DE CONSTRUCCIÓN -->
+<!-- MÓDULO A1: FICHAS DE CONSTRUCCIÓN EXTENDIDAS -->
         <div class="learning-block block-alumno" id="block-a1" data-block-id="a1">
           <div class="block-header" onclick="toggleBlockAlumno('a1')">
             <div class="block-left">
@@ -1935,10 +1935,10 @@
               <div class="block-title-box">
                 <div class="block-tag-row">
                   <span class="block-badge badge-a">Módulo 1</span>
-                  <span class="block-subtag">Taller Práctico</span>
+                  <span class="block-subtag">Taller Práctico Paso a Paso</span>
                 </div>
-                <h3 class="block-title">Fichas de Construcción de Puppets</h3>
-                <p class="block-summary">Paso a paso ilustrado de los 3 modelos, la prueba de los 10 segundos y trucos de contrapeso.</p>
+                <h3 class="block-title">Fichas de Construcción de Puppets (Guía Completa)</h3>
+                <p class="block-summary">Planos técnicos vectoriales, despiece de materiales, la regla de los 10 segundos y trucos de articulación sin rig.</p>
               </div>
             </div>
             <div class="block-right">
@@ -1947,58 +1947,161 @@
           </div>
           <div class="block-content">
             <div class="block-body-inner">
-              <div class="callout callout-alert">
+              <div class="callout callout-alert" style="margin-top:0;">
                 <div>⚖️</div>
                 <div>
-                  <strong>La Prueba de Oro de los 10 Segundos:</strong> Antes de empezar a grabar, suelta tu personaje en la mesa. Si se mantiene quieto 10 segundos sin caerse, ¡está listo! Si tambalea, pon una bola de plastilina en el fondo.
+                  <strong>La Prueba de Oro de los 10 Segundos:</strong> Antes de encender la cámara, coloca tu personaje en el set y cuenta 10 segundos sin tocarlo. Si no se cae ni se balancea, ¡está listo! Si vuelca, añade una bola de plastilina aplastada como contrapeso en la base.
                 </div>
               </div>
 
-              <div class="cards-interactive-grid">
-                <!-- Tarjeta Puppet 1 -->
-                <div class="mini-card-pup">
-                  <div class="pup-header">📦 Modelo 1: Criatura de la Caja</div>
-                  <div class="pup-badge-easy">Muy Fácil</div>
-                  <p class="pup-desc">Una criatura que vive dentro de una caja de cartón. Su propia caja es cuerpo, escenario y apoyo.</p>
-                  <ul class="pup-checklist">
-                    <li>✅ <strong>Paso 1:</strong> Aplasta plastilina en el fondo interior para hacer contrapeso.</li>
-                    <li>✅ <strong>Paso 2:</strong> Pon cinta de carrocero detrás de la tapa para que haga de bisagra suave.</li>
-                    <li>✅ <strong>Paso 3:</strong> Modela ojos saltones con plastilina o tapones de botella en el borde.</li>
-                    <li>✅ <strong>Paso 4:</strong> Pega dientes de papel y una lengua flexible para asustar o atrapar cosas.</li>
-                  </ul>
+              <!-- FICHA 1 EXTENDIDA: CRIATURA DE LA CAJA -->
+              <div class="puppet-detail-card" style="background:#ffffff; border:1px solid #e2e8f0; border-radius:14px; padding:1.5rem; margin-bottom:1.5rem;">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:1rem; border-bottom:1px solid #f1f5f9; padding-bottom:0.75rem;">
+                  <h4 style="font-size:1.2rem; color:#0f172a; margin:0;">📦 Puppet 1: La Criatura de la Caja</h4>
+                  <span class="pup-badge-easy">Dificultad: Muy Fácil · Base Integrada</span>
+                </div>
+                <p style="font-size:0.92rem; color:#475569; margin-bottom:1rem;"><strong>Concepto Narrativo:</strong> Un ser que vive escondido dentro de un envase. Abre la tapa con sigilo, saca ojos curiosos, dientes y una lengua voraz. La propia caja funciona como cuerpo, escenario y apoyo, eliminando por completo el riesgo de caídas.</p>
+                
+                <!-- Diagrama Vectorial SVG Caja -->
+                <div class="vector-diagram-container" style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:1rem; margin-bottom:1.25rem;">
+                  <svg viewBox="0 0 320 200" width="300" height="190" xmlns="http://www.w3.org/2000/svg">
+                    <ellipse cx="160" cy="175" rx="100" ry="12" fill="#cbd5e1"/>
+                    <rect x="80" y="85" width="160" height="85" rx="8" fill="#d97706" stroke="#b45309" stroke-width="3"/>
+                    <rect x="100" y="145" width="120" height="20" rx="4" fill="#334155" opacity="0.85"/>
+                    <text x="160" y="159" font-family="-apple-system, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle" font-weight="bold">CONTRAPESO BASE</text>
+                    <polygon points="80,85 60,45 220,45 240,85" fill="#f59e0b" stroke="#b45309" stroke-width="3"/>
+                    <circle cx="125" cy="68" r="16" fill="#ffffff" stroke="#1e293b" stroke-width="2.5"/>
+                    <circle cx="129" cy="68" r="7" fill="#0f172a"/>
+                    <circle cx="185" cy="68" r="16" fill="#ffffff" stroke="#1e293b" stroke-width="2.5"/>
+                    <circle cx="181" cy="68" r="7" fill="#0f172a"/>
+                    <polygon points="140,85 146,96 152,85 158,96 164,85 170,96 176,85" fill="#ffffff"/>
+                    <path d="M 145 92 Q 160 128 185 120" fill="none" stroke="#ef4444" stroke-width="7" stroke-linecap="round"/>
+                  </svg>
+                  <div class="diagram-caption">Corte esquemático: Estructura interna, contrapeso y articulación de tapa</div>
                 </div>
 
-                <!-- Tarjeta Puppet 2 -->
-                <div class="mini-card-pup">
-                  <div class="pup-header">🟢 Modelo 2: Monstruo Blob</div>
-                  <div class="pup-badge-easy">Muy Fácil</div>
-                  <p class="pup-desc">Un ser viscoso de plastilina que se arrastra, estira y divide. ¡Nunca tropieza porque no tiene piernas!</p>
-                  <ul class="pup-checklist">
-                    <li>✅ <strong>Paso 1:</strong> Haz una pelota apretada con papel de aluminio para ahorrar plastilina.</li>
-                    <li>✅ <strong>Paso 2:</strong> Forra el aluminio con una capa uniforme de plastilina de color.</li>
-                    <li>✅ <strong>Paso 3:</strong> Aplasta la base contra la mesa para que quede plana y muy estable.</li>
-                    <li>✅ <strong>Paso 4:</strong> Modela 3 bocas sueltas de recambio (cerrada, abierta, sonrisa) para cambiarlas en cada foto.</li>
-                  </ul>
-                </div>
-
-                <!-- Tarjeta Puppet 3 -->
-                <div class="mini-card-pup">
-                  <div class="pup-header">🪴 Modelo 3: Planta Carnívora</div>
-                  <div class="pup-badge-mid">Nivel Medio</div>
-                  <p class="pup-desc">Una planta en maceta que gira y muerde. El vaso de yogur actúa como trípode natural.</p>
-                  <ul class="pup-checklist">
-                    <li>✅ <strong>Paso 1:</strong> Llena un tercio de un vaso de yogur con plastilina pesada para que no vuelque.</li>
-                    <li>✅ <strong>Paso 2:</strong> Clava un tallo corto (pajita o alambre forrado) de máximo 7-8 cm de alto.</li>
-                    <li>✅ <strong>Paso 3:</strong> Construye la cabeza con dos conos de cartulina unidos con cinta trasera.</li>
-                    <li>✅ <strong>Paso 4:</strong> Decora con hojas verdes para tapar las uniones mecánicas.</li>
-                  </ul>
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:1rem;">
+                  <div>
+                    <h5 style="color:#0f172a; margin-bottom:0.4rem; font-size:0.92rem;">📋 Materiales de Taller:</h5>
+                    <ul style="font-size:0.88rem; color:#475569; padding-left:1.2rem; margin:0;">
+                      <li>1 caja pequeña de cartón (medicamentos, infusiones).</li>
+                      <li>Plastilina de 2 colores (para contrapeso y ojos).</li>
+                      <li>Cinta de carrocero o celo transparente para la bisagra.</li>
+                      <li>Cartulina blanca para dientes afilados.</li>
+                      <li>Rotuladores de colores para decorar el exterior.</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h5 style="color:#0f172a; margin-bottom:0.4rem; font-size:0.92rem;">👣 Paso a Paso de Fabricación:</h5>
+                    <ol style="font-size:0.88rem; color:#475569; padding-left:1.2rem; margin:0;">
+                      <li><strong>Anclaje:</strong> Aplasta plastilina en el fondo interior de la caja.</li>
+                      <li><strong>Bisagra suave:</strong> Pega una tira de cinta por detrás de la tapa para que abra sin atascarse.</li>
+                      <li><strong>Rasgos faciales:</strong> Modela dos bolas blancas con pupilas negras y pégalas en el borde interior.</li>
+                      <li><strong>Ataque:</strong> Pega dientes triangulares de cartulina y una lengua roja flexible.</li>
+                    </ol>
+                  </div>
                 </div>
               </div>
+
+              <!-- FICHA 2 EXTENDIDA: MONSTRUO BLOB -->
+              <div class="puppet-detail-card" style="background:#ffffff; border:1px solid #e2e8f0; border-radius:14px; padding:1.5rem; margin-bottom:1.5rem;">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:1rem; border-bottom:1px solid #f1f5f9; padding-bottom:0.75rem;">
+                  <h4 style="font-size:1.2rem; color:#0f172a; margin:0;">🟢 Puppet 2: Monstruo Blob de Plastilina</h4>
+                  <span class="pup-badge-easy">Dificultad: Muy Fácil · Transformable</span>
+                </div>
+                <p style="font-size:0.92rem; color:#475569; margin-bottom:1rem;"><strong>Concepto Narrativo:</strong> Un ser extraterrestre viscoso o gelatinoso. No camina: repta como un gusano, se aplasta, se estira o se divide en dos. La técnica de sustitución permite cambiar bocas y ojos entre tomas.</p>
+                
+                <!-- Diagrama Vectorial SVG Blob -->
+                <div class="vector-diagram-container" style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:1rem; margin-bottom:1.25rem;">
+                  <svg viewBox="0 0 320 200" width="300" height="190" xmlns="http://www.w3.org/2000/svg">
+                    <ellipse cx="160" cy="175" rx="110" ry="14" fill="#cbd5e1"/>
+                    <path d="M 65 160 C 50 115, 90 70, 160 65 C 230 70, 270 115, 255 160 C 248 178, 72 178, 65 160 Z" fill="#10b981" stroke="#047857" stroke-width="3.5"/>
+                    <circle cx="160" cy="125" r="38" fill="#94a3b8" stroke="#475569" stroke-dasharray="5,4" stroke-width="2.5"/>
+                    <text x="160" y="129" font-family="-apple-system, sans-serif" font-size="10" fill="#ffffff" text-anchor="middle" font-weight="bold">ALUMINIO</text>
+                    <circle cx="135" cy="85" r="15" fill="#ffffff" stroke="#047857" stroke-width="2.5"/>
+                    <circle cx="138" cy="85" r="6" fill="#0f172a"/>
+                    <circle cx="180" cy="92" r="11" fill="#ffffff" stroke="#047857" stroke-width="2.5"/>
+                    <circle cx="179" cy="92" r="5" fill="#0f172a"/>
+                    <path d="M 140 148 Q 160 160 180 148" fill="none" stroke="#064e3b" stroke-width="5" stroke-linecap="round"/>
+                  </svg>
+                  <div class="diagram-caption">Corte esquemático: Núcleo ultraligero de aluminio envuelto en piel de plastilina</div>
+                </div>
+
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:1rem;">
+                  <div>
+                    <h5 style="color:#0f172a; margin-bottom:0.4rem; font-size:0.92rem;">📋 Materiales de Taller:</h5>
+                    <ul style="font-size:0.88rem; color:#475569; padding-left:1.2rem; margin:0;">
+                      <li>1 o 2 pastillas de plastilina de colores vivos.</li>
+                      <li>Papel de aluminio (1 lámina arrugada en bola).</li>
+                      <li>Palillos de madera para fijar antenas o pinchos.</li>
+                      <li>Trozo de cartón como bandeja de desplazamiento.</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h5 style="color:#0f172a; margin-bottom:0.4rem; font-size:0.92rem;">👣 Paso a Paso de Fabricación:</h5>
+                    <ol style="font-size:0.88rem; color:#475569; padding-left:1.2rem; margin:0;">
+                      <li><strong>Ahorro y ligereza:</strong> Arruga una bola compacta de aluminio del tamaño de una nuez.</li>
+                      <li><strong>Recubrimiento:</strong> Extiende plastilina como una masa y cubre el aluminio por completo.</li>
+                      <li><strong>Base plana:</strong> Presiona contra la mesa creando una silueta ancha y baja.</li>
+                      <li><strong>Piezas de recambio:</strong> Modela aparte 3 bocas (cerrada, abierta, sonrisa) para alternarlas durante el rodaje.</li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
+
+              <!-- FICHA 3 EXTENDIDA: PLANTA CARNÍVORA -->
+              <div class="puppet-detail-card" style="background:#ffffff; border:1px solid #e2e8f0; border-radius:14px; padding:1.5rem;">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:1rem; border-bottom:1px solid #f1f5f9; padding-bottom:0.75rem;">
+                  <h4 style="font-size:1.2rem; color:#0f172a; margin:0;">🪴 Puppet 3: Planta Carnívora en Maceta</h4>
+                  <span class="pup-badge-mid">Dificultad: Nivel Medio · Tallo Flexible</span>
+                </div>
+                <p style="font-size:0.92rem; color:#475569; margin-bottom:1rem;"><strong>Concepto Narrativo:</strong> Una planta monstruosa con apetito insaciable que gira, asoma la cabeza y muerde objetos. La maceta reciclada actúa como trípode natural de soporte.</p>
+                
+                <!-- Diagrama Vectorial SVG Planta -->
+                <div class="vector-diagram-container" style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:1rem; margin-bottom:1.25rem;">
+                  <svg viewBox="0 0 320 210" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+                    <ellipse cx="160" cy="188" rx="75" ry="10" fill="#cbd5e1"/>
+                    <polygon points="110,130 210,130 195,182 125,182" fill="#ea580c" stroke="#9a3412" stroke-width="3"/>
+                    <rect x="126" y="152" width="68" height="24" fill="#78350f" opacity="0.8"/>
+                    <text x="160" y="167" font-family="-apple-system, sans-serif" font-size="9" fill="#ffffff" text-anchor="middle" font-weight="bold">CONTRAPESO</text>
+                    <path d="M 160 130 Q 140 95 160 70" fill="none" stroke="#65a30d" stroke-width="9" stroke-linecap="round"/>
+                    <path d="M 140 65 C 120 35, 200 35, 185 65 Z" fill="#84cc16" stroke="#4d7c0f" stroke-width="3"/>
+                    <path d="M 140 65 C 125 90, 195 90, 185 65 Z" fill="#65a30d" stroke="#4d7c0f" stroke-width="3"/>
+                    <polygon points="148,65 154,56 160,65 166,56 172,65 178,56 182,65" fill="#ffffff"/>
+                    <path d="M 150 130 Q 110 115 105 135 Z" fill="#84cc16"/>
+                    <path d="M 170 130 Q 210 115 215 135 Z" fill="#84cc16"/>
+                  </svg>
+                  <div class="diagram-caption">Corte esquemático: Vaso con peso inferior, tallo corto y mandíbula doble articulada</div>
+                </div>
+
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:1rem;">
+                  <div>
+                    <h5 style="color:#0f172a; margin-bottom:0.4rem; font-size:0.92rem;">📋 Materiales de Taller:</h5>
+                    <ul style="font-size:0.88rem; color:#475569; padding-left:1.2rem; margin:0;">
+                      <li>1 vaso limpio de yogur o vaso de papel.</li>
+                      <li>Plastilina vieja o piedras pequeñas para lastrar la maceta.</li>
+                      <li>Pajita de refresco flexible o alambre de manualidades forrado.</li>
+                      <li>Cartulina verde y roja para las mandíbulas.</li>
+                      <li>Cola blanca o cinta adhesiva.</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h5 style="color:#0f172a; margin-bottom:0.4rem; font-size:0.92rem;">👣 Paso a Paso de Fabricación:</h5>
+                    <ol style="font-size:0.88rem; color:#475569; padding-left:1.2rem; margin:0;">
+                      <li><strong>Ancla el vaso:</strong> Llena un tercio del vaso con plastilina pesada para que no vuelque.</li>
+                      <li><strong>Tallo estable:</strong> Clava la pajita en el centro (máximo 7 u 8 cm de alto).</li>
+                      <li><strong>Mandíbula doble:</strong> Recorta dos conos de cartulina y únelos por detrás con cinta a modo de bisagra.</li>
+                      <li><strong>Dientes y hojas:</strong> Pega dientes afilados de cartulina blanca y añade hojas verdes alrededor del tallo.</li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
 
-        <!-- MÓDULO A2: TEORÍA DE ANIMACIÓN -->
+<!-- MÓDULO A2: TEORÍA DE ANIMACIÓN EXTENDIDA -->
         <div class="learning-block block-alumno" id="block-a2" data-block-id="a2">
           <div class="block-header" onclick="toggleBlockAlumno('a2')">
             <div class="block-left">
@@ -2006,10 +2109,10 @@
               <div class="block-title-box">
                 <div class="block-tag-row">
                   <span class="block-badge badge-a">Módulo 2</span>
-                  <span class="block-subtag">Conceptos Clave</span>
+                  <span class="block-subtag">Conceptos Clave del Cine de Animación</span>
                 </div>
-                <h3 class="block-title">Teoría Visual: El Arte de Dar Vida</h3>
-                <p class="block-summary">¿Qué es el timing, el spacing, el onion skin y cómo planificar con un storyboard?</p>
+                <h3 class="block-title">Teoría Visual: Fundamentos del Movimiento y Lenguaje Audiovisual</h3>
+                <p class="block-summary">Persistencia retiniana, cadencia de fotogramas (FPS), timing vs spacing, anticipación, escala de planos y foley sonoro.</p>
               </div>
             </div>
             <div class="block-right">
@@ -2018,37 +2121,76 @@
           </div>
           <div class="block-content">
             <div class="block-body-inner">
-              <div class="theory-grid">
+              
+              <!-- Diagrama de Roles en el Set -->
+              <h4 style="font-size:1.15rem; color:#0f172a; margin-bottom:0.6rem;">👥 Los 4 Roles del Equipo de Rodaje</h4>
+              <p style="font-size:0.9rem; color:#475569; margin-bottom:1rem;">En stop motion el trabajo en grupo es la clave del éxito. Cada miembro asume una responsabilidad rotativa:</p>
+              
+              <div class="vector-diagram-container" style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:1rem; margin-bottom:1.5rem;">
+                <svg viewBox="0 0 780 140" width="100%" height="140" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="10" y="20" width="170" height="100" rx="12" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+                  <text x="95" y="55" font-family="-apple-system, sans-serif" font-size="22" text-anchor="middle">🎬</text>
+                  <text x="95" y="80" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#1e3a8a" text-anchor="middle">1. Dirección</text>
+                  <text x="95" y="100" font-family="-apple-system, sans-serif" font-size="10.5" fill="#475569" text-anchor="middle">Guion y continuidad</text>
+
+                  <rect x="205" y="20" width="170" height="100" rx="12" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="2"/>
+                  <text x="290" y="55" font-family="-apple-system, sans-serif" font-size="22" text-anchor="middle">✋</text>
+                  <text x="290" y="80" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#5b21b6" text-anchor="middle">2. Animación</text>
+                  <text x="290" y="100" font-family="-apple-system, sans-serif" font-size="10.5" fill="#475569" text-anchor="middle">Micro-movimiento físico</text>
+
+                  <rect x="400" y="20" width="170" height="100" rx="12" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/>
+                  <text x="485" y="55" font-family="-apple-system, sans-serif" font-size="22" text-anchor="middle">📸</text>
+                  <text x="485" y="80" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#065f46" text-anchor="middle">3. Cámara & Luz</text>
+                  <text x="485" y="100" font-family="-apple-system, sans-serif" font-size="10.5" fill="#475569" text-anchor="middle">Encuadre fijo y disparo</text>
+
+                  <rect x="595" y="20" width="170" height="100" rx="12" fill="#fffbeb" stroke="#f59e0b" stroke-width="2"/>
+                  <text x="680" y="55" font-family="-apple-system, sans-serif" font-size="22" text-anchor="middle">🎨</text>
+                  <text x="680" y="80" font-family="-apple-system, sans-serif" font-size="13" font-weight="bold" fill="#92400e" text-anchor="middle">4. Arte & Foley</text>
+                  <text x="680" y="100" font-family="-apple-system, sans-serif" font-size="10.5" fill="#475569" text-anchor="middle">Set, atrezo y sonidos</text>
+                </svg>
+                <div class="diagram-caption">Sincronización de roles: Un rodaje fluido sin interrupciones</div>
+              </div>
+
+              <!-- Glosario Teórico en Fichas -->
+              <h4 style="font-size:1.15rem; color:#0f172a; margin-bottom:0.6rem;">📚 Principios de Animación Explicados</h4>
+              
+              <div class="theory-grid" style="grid-template-columns:repeat(auto-fit, minmax(290px, 1fr));">
                 <div class="theory-pill">
                   <span class="pill-icon">🎞️</span>
-                  <strong>Fotograma (Frame):</strong> Cada foto fija. 1 segundo de película suele tener entre 8 y 12 fotos en stop motion escolar.
+                  <strong>Fotograma y Persistencia Retiniana:</strong> La animación es una ilusión óptica. El ojo humano retiene una imagen durante una fracción de segundo; si mostramos entre 8 y 12 fotos por segundo con variaciones mínimas, el cerebro interpreta movimiento continuo.
                 </div>
                 <div class="theory-pill">
                   <span class="pill-icon">⏱️</span>
-                  <strong>Timing (Tiempo):</strong> Cuántas fotos dura una acción. Si la caja se abre en 3 fotos parecerá un susto rápido; si tarda 30 fotos parecerá sigilosa.
+                  <strong>Timing (Duración temporal):</strong> La cantidad de fotos que empleamos para una acción. Una acción en 3 fotos parecerá explosiva, como un estornudo o un golpe; la misma acción en 30 fotos transmitirá pesadez, sigilo o pereza.
                 </div>
                 <div class="theory-pill">
                   <span class="pill-icon">📏</span>
-                  <strong>Spacing (Espaciado):</strong> Cuánto mueves el muñeco entre foto y foto. Mover poquito = despacio; saltos grandes = gran velocidad.
+                  <strong>Spacing (Distancia espacial):</strong> La distancia que avanza el muñeco entre fotograma y fotograma. Microdesplazamientos de 1 milímetro generan aceleración suave; saltos de 2 centímetros provocan velocidad de cohete.
                 </div>
                 <div class="theory-pill">
                   <span class="pill-icon">🧅</span>
-                  <strong>Piel de Cebolla (Onion Skin):</strong> Ver la foto anterior en transparencia como un fantasma para medir exactamente cuánto mover el puppet.
+                  <strong>Piel de Cebolla (Onion Skin):</strong> La función digital que muestra la captura anterior semitransparente como una sombra. Es tu regla visual invisible para saber exactamente cuánto mover el puppet respecto a la toma anterior.
+                </div>
+                <div class="theory-pill">
+                  <span class="pill-icon">🤸</span>
+                  <strong>Anticipación y Pausa de Acting:</strong> Antes de saltar, un personaje siempre se agacha (anticipación). Al aterrizar, se queda quieto 1 segundo para que el público asimile lo que ha ocurrido (pausa de lectura).
                 </div>
                 <div class="theory-pill">
                   <span class="pill-icon">📐</span>
-                  <strong>Plano General vs. Primer Plano:</strong> El Plano General sitúa el escenario; el Primer Plano destaca la emoción en los ojos del personaje.
-                </div>
-                <div class="theory-pill">
-                  <span class="pill-icon">🚪</span>
-                  <strong>Transición Híbrida:</strong> El truco narrativo para saltar al 3D: cerrar una caja en real y que se abra dentro del monitor de Blender.
+                  <strong>Escala de Planos Cinematográficos:</strong>
+                  <ul style="padding-left:1.1rem; margin-top:4px;">
+                    <li><strong>Plano General:</strong> Muestra el escenario y sitúa al monstruo en su mundo.</li>
+                    <li><strong>Primer Plano:</strong> Rostro y ojos para transmitir emoción (miedo, alegría, furia).</li>
+                    <li><strong>Plano Detalle:</strong> Enfoque cerrado sobre la llave, la caja o el objeto mágico.</li>
+                  </ul>
                 </div>
               </div>
+
             </div>
           </div>
         </div>
 
-        <!-- MÓDULO A3: SHORTCUTS BLENDER & DRAGONFRAME -->
+<!-- MÓDULO A3: SHORTCUTS EXTENDIDOS BLENDER & DRAGONFRAME -->
         <div class="learning-block block-alumno" id="block-a3" data-block-id="a3">
           <div class="block-header" onclick="toggleBlockAlumno('a3')">
             <div class="block-left">
@@ -2056,10 +2198,10 @@
               <div class="block-title-box">
                 <div class="block-tag-row">
                   <span class="block-badge badge-a">Módulo 3</span>
-                  <span class="block-subtag">Chuleta de Teclado</span>
+                  <span class="block-subtag">Manual de Control de Teclado</span>
                 </div>
-                <h3 class="block-title">Atajos de Teclado: Blender & Dragonframe</h3>
-                <p class="block-summary">Los shortcuts indispensables para trabajar rápido y como un profesional en el ordenador.</p>
+                <h3 class="block-title">Atajos de Teclado y Flujo de Trabajo (Blender & Dragonframe)</h3>
+                <p class="block-summary">Guía completa de shortcuts para modelar con primitivas, animar por keyframes y capturar tomas como un profesional.</p>
               </div>
             </div>
             <div class="block-right">
@@ -2068,45 +2210,56 @@
           </div>
           <div class="block-content">
             <div class="block-body-inner">
+              
+              <div class="callout callout-info" style="margin-top:0;">
+                <div>🖱️</div>
+                <div>
+                  <strong>Regla Básica de Blender: ¡Usa siempre el Ratón!</strong> El ratón con rueda central es indispensable en 3D: con la rueda orbitas la vista, con <code>Shift + rueda</code> te desplazas lateralmente (Pan), y girando la rueda haces Zoom.
+                </div>
+              </div>
+
               <div class="shortcuts-container">
-                <!-- Columna Blender -->
+                <!-- Columna Blender Completa -->
                 <div class="shortcut-col">
-                  <div class="sh-head sh-blender">🟠 Blender 3D (Comandos Esenciales)</div>
+                  <div class="sh-head sh-blender">🟠 Blender 3D (Comandos Esenciales de Taller)</div>
                   <table class="sh-table">
-                    <tr><td><kbd>G</kbd></td><td><strong>Grab:</strong> Mover el objeto en la escena</td></tr>
-                    <tr><td><kbd>R</kbd></td><td><strong>Rotate:</strong> Girar el objeto</td></tr>
-                    <tr><td><kbd>S</kbd></td><td><strong>Scale:</strong> Cambiar el tamaño (escalar)</td></tr>
-                    <tr><td><kbd>Shift</kbd> + <kbd>A</kbd></td><td><strong>Add:</strong> Añadir nueva primitiva (cubo, esfera...)</td></tr>
-                    <tr><td><kbd>Shift</kbd> + <kbd>D</kbd></td><td><strong>Duplicate:</strong> Duplicar objeto seleccionado</td></tr>
-                    <tr><td><kbd>I</kbd></td><td><strong>Insert Keyframe:</strong> Guardar posición para animar</td></tr>
-                    <tr><td><kbd>Barra Espacio</kbd></td><td><strong>Play / Pause:</strong> Reproducir animación</td></tr>
-                    <tr><td><kbd>0</kbd> (NumPad)</td><td><strong>Camera:</strong> Mirar por la cámara virtual</td></tr>
-                    <tr><td><kbd>Ctrl</kbd> + <kbd>S</kbd></td><td><strong>Save:</strong> ¡Guardar tu archivo .blend!</td></tr>
+                    <tr><td><kbd>G</kbd></td><td><strong>Grab:</strong> Mover el objeto en la escena (pulsa <kbd>X</kbd>, <kbd>Y</kbd> o <kbd>Z</kbd> para bloquear eje)</td></tr>
+                    <tr><td><kbd>R</kbd></td><td><strong>Rotate:</strong> Girar el objeto en 360 grados</td></tr>
+                    <tr><td><kbd>S</kbd></td><td><strong>Scale:</strong> Cambiar el tamaño (escalar mayor o menor)</td></tr>
+                    <tr><td><kbd>Shift</kbd> + <kbd>A</kbd></td><td><strong>Add:</strong> Menú para añadir primitivas (cubo, esfera, cilindro, plano)</td></tr>
+                    <tr><td><kbd>Shift</kbd> + <kbd>D</kbd></td><td><strong>Duplicate:</strong> Duplicar forma geométrica seleccionada</td></tr>
+                    <tr><td><kbd>X</kbd> o <kbd>Supr</kbd></td><td><strong>Delete:</strong> Eliminar el objeto seleccionado</td></tr>
+                    <tr><td><kbd>I</kbd></td><td><strong>Insert Keyframe:</strong> Guardar fotograma clave de posición/rotación en el timeline</td></tr>
+                    <tr><td><kbd>Barra Espacio</kbd></td><td><strong>Play / Pause:</strong> Reproducir o detener la animación en tiempo real</td></tr>
+                    <tr><td><kbd>0</kbd> (NumPad)</td><td><strong>Camera View:</strong> Mirar a través de la cámara virtual de render</td></tr>
+                    <tr><td><kbd>Z</kbd></td><td><strong>Shading Pie:</strong> Cambiar entre vista Solid, Wireframe y Material Preview</td></tr>
+                    <tr><td><kbd>Ctrl</kbd> + <kbd>Z</kbd></td><td><strong>Undo:</strong> Deshacer el último cambio si cometiste un error</td></tr>
+                    <tr><td><kbd>Ctrl</kbd> + <kbd>S</kbd></td><td><strong>Save:</strong> ¡Guardar tu archivo .blend para no perder el trabajo!</td></tr>
                   </table>
                 </div>
 
                 <!-- Columna Dragonframe / Stop Motion Studio -->
                 <div class="shortcut-col">
-                  <div class="sh-head sh-dragon">🔴 Dragonframe / Stop Motion Studio</div>
+                  <div class="sh-head sh-dragon">🔴 Dragonframe / Stop Motion Studio (Set de Rodaje)</div>
                   <table class="sh-table">
-                    <tr><td><kbd>Enter</kbd> o <kbd>NumPad 3</kbd></td><td><strong>Shoot:</strong> Capturar nuevo fotograma</td></tr>
-                    <tr><td><kbd>NumPad 1</kbd> / <kbd>2</kbd></td><td><strong>Step Back / Forward:</strong> Pasar al fotograma anterior o siguiente</td></tr>
-                    <tr><td><kbd>NumPad 0</kbd> o <kbd>Barra</kbd></td><td><strong>Play:</strong> Reproducir la secuencia capturada</td></tr>
-                    <tr><td><kbd>O</kbd></td><td><strong>Onion Skin:</strong> Activar/Desactivar piel de cebolla</td></tr>
-                    <tr><td><kbd>NumPad 5</kbd></td><td><strong>Live View:</strong> Volver a la vista en directo</td></tr>
-                    <tr><td><kbd>Delete</kbd></td><td><strong>Delete Frame:</strong> Borrar última foto si salió una mano</td></tr>
-                    <tr><td><kbd>H</kbd></td><td><strong>High-Res:</strong> Previsualizar en alta resolución</td></tr>
+                    <tr><td><kbd>Enter</kbd> o <kbd>NumPad 3</kbd></td><td><strong>Shoot:</strong> Disparar y capturar un nuevo fotograma</td></tr>
+                    <tr><td><kbd>NumPad 1</kbd></td><td><strong>Step Back:</strong> Retroceder al fotograma anterior para comparar</td></tr>
+                    <tr><td><kbd>NumPad 2</kbd></td><td><strong>Step Forward:</strong> Avanzar al fotograma siguiente</td></tr>
+                    <tr><td><kbd>NumPad 0</kbd> o <kbd>Barra</kbd></td><td><strong>Play Loop:</strong> Reproducir la secuencia capturada en bucle</td></tr>
+                    <tr><td><kbd>O</kbd></td><td><strong>Onion Skin:</strong> Activar / Desactivar la piel de cebolla semitransparente</td></tr>
+                    <tr><td><kbd>NumPad 5</kbd></td><td><strong>Live View:</strong> Volver inmediatamente a la vista de cámara en directo</td></tr>
+                    <tr><td><kbd>Delete</kbd></td><td><strong>Delete Frame:</strong> Borrar la última foto si se coló una mano o sombra</td></tr>
+                    <tr><td><kbd>H</kbd></td><td><strong>High-Res:</strong> Previsualizar la toma con máxima calidad fotográfica</td></tr>
+                    <tr><td><kbd>Ctrl</kbd> + <kbd>E</kbd></td><td><strong>Export:</strong> Exportar la secuencia terminada a archivo de vídeo MP4</td></tr>
                   </table>
                 </div>
               </div>
+
             </div>
           </div>
         </div>
 
-        
-
-
-        <!-- MACRO-BLOQUE FINAL EVALUATIVO PLEGABLE: LAS 3 EVALUACIONES Y SUS 15 JUEGOS -->
+<!-- MACRO-BLOQUE FINAL EVALUATIVO PLEGABLE: LAS 3 EVALUACIONES Y SUS 15 JUEGOS -->
         <div class="learning-block block-alumno macro-eval-block open" id="block-macro-evaluaciones">
           <div class="block-header" onclick="toggleMacroEvaluaciones()">
             <div class="block-left">

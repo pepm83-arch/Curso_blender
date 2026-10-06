@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guía Didáctica: Animación Artesanal y 3D (Stop Motion + Blender)</title>
+  <style>
+    :root {
+      --primary: #0969da;
+      --primary-hover: #074796;
+      --bg-page: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --accent: #8b5cf6;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* BLOQUEO POR CONTRASEÑA */
+    #content-wrapper {
+      display: none;
+    }
+
+    #content-wrapper.unlocked {
+      display: block;
+    }
+
+    /* MODAL DE CLAVE */
+    #access-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: radial-gradient(circle at center, rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.98));
+      backdrop-filter: blur(8px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 99999;
+      padding: 1.5rem;
+    }
+
+    .modal-box {
+      background: #ffffff;
+      max-width: 440px;
+      width: 100%;
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      animation: modalPop 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes modalPop {
+      0% { transform: scale(0.9) translateY(20px); opacity: 0; }
+      100% { transform: scale(1) translateY(0); opacity: 1; }
+    }
+
+    .modal-icon-badge {
+      width: 68px;
+      height: 68px;
+      margin: 0 auto 1.25rem;
+      border-radius: 50%;
+      background: #eff6ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 0 6px #dbeafe;
+    }
+
+    .modal-box h2 {
+      font-size: 1.45rem;
+      color: #0f172a;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+
+    .modal-box p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .code-input-group {
+      position: relative;
+      margin-bottom: 1rem;
+    }
+
+    .code-input {
+      width: 100%;
+      padding: 1rem 1.25rem;
+      font-size: 1.15rem;
+      letter-spacing: 0.25em;
+      text-align: center;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      outline: none;
+      transition: all 0.2s ease;
+      font-weight: 600;
+      color: #0f172a;
+      background: #f8fafc;
+    }
+
+    .code-input:focus {
+      border-color: var(--primary);
+      background: #ffffff;
+      box-shadow: 0 0 0 4px rgba(9, 105, 218, 0.15);
+    }
+
+    .modal-btn {
+      width: 100%;
+      padding: 0.95rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #ffffff;
+      background: linear-gradient(135deg, var(--primary), #2563eb);
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+    }
+
+    .modal-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+    }
+
+    .error-msg {
+      display: none;
+      color: var(--danger);
+      font-size: 0.88rem;
+      margin-top: 0.75rem;
+      font-weight: 500;
+    }
+
+    .hint-chip {
+      display: inline-block;
+      margin-top: 1.25rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      background: #f1f5f9;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    /* ESTILOS DE LA GUÍA DIDÁCTICA */
+    .hero-header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #ffffff;
+      padding: 3.5rem 1.5rem;
+      text-align: center;
+      border-bottom: 4px solid var(--primary);
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(9, 105, 218, 0.25);
+      border: 1px solid rgba(96, 165, 250, 0.4);
+      color: #93c5fd;
+      padding: 0.35rem 0.9rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .hero-header h1 {
+      font-size: 2.3rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+      color: #ffffff;
+    }
+
+    .hero-subtitle {
+      font-size: 1.15rem;
+      color: #cbd5e1;
+      max-width: 750px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .container {
+      max-width: 1040px;
+      margin: -2rem auto 4rem;
+      padding: 0 1.5rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 2.25rem;
+      margin-bottom: 2rem;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid #f1f5f9;
+    }
+
+    .callout {
+      padding: 1.25rem 1.5rem;
+      border-radius: 12px;
+      margin: 1.5rem 0;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      border-left: 5px solid;
+    }
+
+    .callout-info {
+      background: #f0f9ff;
+      border-color: #0284c7;
+      color: #0c4a6e;
+    }
+
+    .callout-alert {
+      background: #fffbeb;
+      border-color: #f59e0b;
+      color: #78350f;
+    }
+
+    /* DIAGRAMAS VECTORIALES SVG */
+    .vector-diagram-container {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+    }
+
+    .vector-diagram-container svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .diagram-caption {
+      margin-top: 0.75rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* GRID DE PUPPETS */
+    .puppets-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.75rem;
+      margin-top: 1.5rem;
+    }
+
+    .puppet-card {
+      background: #ffffff;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .puppet-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    .puppet-illustration {
+      background: linear-gradient(180deg, #f1f5f9 0%, #e2e8f0 100%);
+      padding: 1.75rem 1rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 200px;
+    }
+
+    .puppet-content {
+      padding: 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .puppet-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 6px;
+      display: inline-block;
+      margin-bottom: 0.65rem;
+    }
+
+    .tag-easy { background: #dcfce7; color: #15803d; }
+    .tag-medium { background: #fef3c7; color: #b45309; }
+
+    .step-list {
+      margin: 1rem 0;
+      padding-left: 1.25rem;
+      font-size: 0.92rem;
+      color: #334155;
+    }
+
+    .step-list li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* TABLAS ESTILIZADAS */
+    .table-container {
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.92rem;
+    }
+
+    th {
+      background: #f8fafc;
+      padding: 0.85rem 1rem;
+      font-weight: 600;
+      color: #0f172a;
+      border-bottom: 1px solid var(--border);
+    }
+
+    td {
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid var(--border);
+      color: #334155;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:hover td {
+      background: #f8fafc;
+    }
+
+    /* DESCARGAS */
+    .download-bar {
+      background: linear-gradient(135deg, #eff6ff, #dbeafe);
+      border: 1px solid #bfdbfe;
+      border-radius: 14px;
+      padding: 1.25rem 1.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: gap;
+      margin-top: 1rem;
+    }
+
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--primary);
+      color: #ffffff;
+      padding: 0.65rem 1.25rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: background 0.2s;
+    }
+
+    .download-btn:hover {
+      background: var(--primary-hover);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- MODAL DE ACCESO / CLAVE -->
+  <div id="access-modal-overlay">
+    <div class="modal-box">
+      <div class="modal-icon-badge">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#0969da" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+        </svg>
+      </div>
+      <h2>Contenido Protegido</h2>
+      <p>Introduce la clave de acceso docente o de aula para consultar la guía didáctica interactiva.</p>
+      
+      <div class="code-input-group">
+        <input type="password" id="access-code-input" class="code-input" placeholder="••••••••" autofocus autocomplete="off">
+        <div id="access-error" class="error-msg">⚠️ Código incorrecto. Inténtalo de nuevo.</div>
+      </div>
+      
+      <button id="unlock-btn" class="modal-btn">Desbloquear Guía</button>
+      <div class="hint-chip">💡 Clave por defecto para el centro: <strong>blender2026</strong> o <strong>animacion</strong></div>
+    </div>
+  </div>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div id="content-wrapper">
+    <header class="hero-header">
+      <span class="hero-badge">34 Sesiones · 10 a 14 Años · Bajo Coste</span>
+      <h1>Guía Didáctica: Animación Artesanal y 3D</h1>
+      <p class="hero-subtitle">Proyecto educativo de Stop Motion + Blender para centros con recursos limitados</p>
+    </header>
+
+    <main class="container">
+      
+      <!-- DESCARGA DEL PDF -->
+      <div class="download-bar">
+        <div>
+          <h3 style="font-size:1.05rem; color:#1e3a8a; margin-bottom:2px;">📄 Documento Oficial Completo en PDF</h3>
+          <p style="font-size:0.88rem; color:#3b82f6;">Edición maquetada de 14 páginas lista para imprimir o compartir.</p>
+        </div>
+        <a href="Guia_Didactica_Animacion_StopMotion_Blender.pdf" class="download-btn" download>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          Descargar PDF
+        </a>
+      </div>
+      <br>
+
+      <!-- SECCIÓN 1: VECTORES DEL FLUJO DIDÁCTICO -->
+      <section class="card">
+        <h2 class="section-title">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          Flujo de Aprendizaje: De lo Físico a lo Digital
+        </h2>
+        <p>El proyecto combina la motricidad física del trabajo artesanal con la alfabetización en tres dimensiones:</p>
+
+        <!-- DIAGRAMA VECTORIAL SVG 1: PIPELINE GENERAL -->
+        <div class="vector-diagram-container">
+          <svg viewBox="0 0 850 180" width="100%" height="180" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#3b82f6" />
+                <stop offset="100%" stop-color="#1d4ed8" />
+              </linearGradient>
+              <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#8b5cf6" />
+                <stop offset="100%" stop-color="#6d28d9" />
+              </linearGradient>
+              <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#10b981" />
+                <stop offset="100%" stop-color="#047857" />
+              </linearGradient>
+              <filter id="shadow" x="-5%" y="-5%" width="115%" height="115%">
+                <feDropShadow dx="0" dy="4" stdDeviation="4" flood-opacity="0.1"/>
+              </filter>
+            </defs>
+
+            <!-- NODO 1: FÍSICO -->
+            <g filter="url(#shadow)">
+              <rect x="20" y="30" width="220" height="110" rx="14" fill="#ffffff" stroke="#bfdbfe" stroke-width="2"/>
+              <rect x="20" y="30" width="220" height="8" rx="4" fill="url(#grad1)"/>
+              <circle cx="55" cy="70" r="18" fill="#eff6ff"/>
+              <text x="55" y="76" font-size="18" text-anchor="middle">📦</text>
+              <text x="85" y="66" font-family="sans-serif" font-size="14" font-weight="700" fill="#0f172a">Fase 1: Stop Motion</text>
+              <text x="85" y="85" font-family="sans-serif" font-size="11" fill="#64748b">Grupos de 3-4 (11 Ses.)</text>
+              <text x="35" y="115" font-family="sans-serif" font-size="11" fill="#334155">Puppets reciclados + Rodaje</text>
+            </g>
+
+            <!-- FLECHA 1 -->
+            <path d="M 250 85 L 300 85" stroke="#94a3b8" stroke-width="3" stroke-dasharray="6,6"/>
+            <polygon points="300,80 310,85 300,90" fill="#94a3b8"/>
+
+            <!-- NODO 2: BLENDER -->
+            <g filter="url(#shadow)">
+              <rect x="315" y="30" width="220" height="110" rx="14" fill="#ffffff" stroke="#ddd6fe" stroke-width="2"/>
+              <rect x="315" y="30" width="220" height="8" rx="4" fill="url(#grad2)"/>
+              <circle cx="350" cy="70" r="18" fill="#f5f3ff"/>
+              <text x="350" y="76" font-size="18" text-anchor="middle">💻</text>
+              <text x="380" y="66" font-family="sans-serif" font-size="14" font-weight="700" fill="#0f172a">Fase 2: Blender 3D</text>
+              <text x="380" y="85" font-family="sans-serif" font-size="11" fill="#64748b">Individual (14 Sesiones)</text>
+              <text x="330" y="115" font-family="sans-serif" font-size="11" fill="#334155">Primitivas + Keyframes</text>
+            </g>
+
+            <!-- FLECHA 2 -->
+            <path d="M 545 85 L 595 85" stroke="#94a3b8" stroke-width="3" stroke-dasharray="6,6"/>
+            <polygon points="595,80 605,85 595,90" fill="#94a3b8"/>
+
+            <!-- NODO 3: HÍBRIDO -->
+            <g filter="url(#shadow)">
+              <rect x="610" y="30" width="220" height="110" rx="14" fill="#ffffff" stroke="#a7f3d0" stroke-width="2"/>
+              <rect x="610" y="30" width="220" height="8" rx="4" fill="url(#grad3)"/>
+              <circle cx="645" cy="70" r="18" fill="#ecfdf5"/>
+              <text x="645" y="76" font-size="18" text-anchor="middle">🎬</text>
+              <text x="675" y="66" font-family="sans-serif" font-size="14" font-weight="700" fill="#0f172a">Fase 3: Corto Mixto</text>
+              <text x="675" y="85" font-family="sans-serif" font-size="11" fill="#64748b">Mixto (9 Sesiones)</text>
+              <text x="625" y="115" font-family="sans-serif" font-size="11" fill="#334155">Transición + Mini Festival</text>
+            </g>
+          </svg>
+          <div class="diagram-caption">Esquema vectorial: Progresión metodológica en 34 sesiones</div>
+        </div>
+
+        <div class="callout callout-info">
+          <div>💡</div>
+          <div>
+            <strong>Pilar Metodológico:</strong> El stop motion en grupos enseña la disciplina del fotograma y la colaboración; Blender de forma individual afianza la soltura en el espacio 3D y la autonomía técnica.
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 2: PASO A PASO DE LOS PUPPETS (GRÁFICOS VECTORIALES) -->
+      <section class="card">
+        <h2 class="section-title">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+          Manual de Creación de Puppets (Guía para el Alumnado)
+        </h2>
+
+        <div class="callout callout-alert">
+          <div>⚖️</div>
+          <div>
+            <strong>Regla de Oro - «La Prueba de los 10 Segundos»:</strong> Antes de animar, coloca tu personaje en la mesa. Debe quedarse completamente quieto durante 10 segundos sin caerse. Si vuelca, añade contrapeso de plastilina en la base.
+          </div>
+        </div>
+
+        <div class="puppets-grid">
+
+          <!-- PUPPET 1: CRIATURA DE LA CAJA -->
+          <div class="puppet-card">
+            <div class="puppet-illustration">
+              <!-- VECTOR PUPPET 1 -->
+              <svg viewBox="0 0 220 180" width="100%" height="160" xmlns="http://www.w3.org/2000/svg">
+                <!-- Sombra -->
+                <ellipse cx="110" cy="160" rx="70" ry="10" fill="#cbd5e1"/>
+                <!-- Cuerpo Caja -->
+                <rect x="50" y="80" width="120" height="75" rx="6" fill="#d97706" stroke="#b45309" stroke-width="3"/>
+                <!-- Contrapeso interior (indicador fantasma) -->
+                <rect x="65" y="130" width="90" height="18" rx="4" fill="#475569" opacity="0.6"/>
+                <text x="110" y="143" font-family="sans-serif" font-size="9" fill="#ffffff" text-anchor="middle" font-weight="bold">CONTRAPESO BASE</text>
+                <!-- Tapa abierta -->
+                <polygon points="50,80 35,45 155,45 170,80" fill="#f59e0b" stroke="#b45309" stroke-width="3"/>
+                <!-- Ojos saltones -->
+                <circle cx="85" cy="65" r="14" fill="#ffffff" stroke="#1e293b" stroke-width="2"/>
+                <circle cx="88" cy="65" r="6" fill="#0f172a"/>
+                <circle cx="135" cy="65" r="14" fill="#ffffff" stroke="#1e293b" stroke-width="2"/>
+                <circle cx="132" cy="65" r="6" fill="#0f172a"/>
+                <!-- Lengua / Dientes -->
+                <polygon points="95,80 100,90 105,80 110,90 115,80 120,90 125,80" fill="#ffffff"/>
+                <path d="M 100 85 Q 110 115 130 110" fill="none" stroke="#ef4444" stroke-width="6" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="puppet-content">
+              <span class="puppet-tag tag-easy">Nivel: Muy Fácil</span>
+              <h3 style="font-size:1.15rem; margin-bottom:0.5rem; color:#0f172a;">1. La Criatura de la Caja</h3>
+              <p style="font-size:0.88rem; color:#64748b; margin-bottom:0.75rem;">Cuerpo rígido y base integrada. ¡No tiene piernas, por lo que nunca tropieza!</p>
+              <ol class="step-list">
+                <li><strong>Añade contrapeso:</strong> Pega plastilina o una piedra en el fondo interior de una caja pequeña.</li>
+                <li><strong>Bisagra de la tapa:</strong> Refuerza la parte trasera con cinta adhesiva para abrirla suavemente.</li>
+                <li><strong>Ojos saltones:</strong> Modela dos bolas de plastilina o tapones en el borde interior.</li>
+                <li><strong>Boca y sorpresa:</strong> Añade dientes de cartulina y lengua de plastilina o tentáculo.</li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- PUPPET 2: MONSTRUO BLOB -->
+          <div class="puppet-card">
+            <div class="puppet-illustration">
+              <!-- VECTOR PUPPET 2 -->
+              <svg viewBox="0 0 220 180" width="100%" height="160" xmlns="http://www.w3.org/2000/svg">
+                <!-- Sombra -->
+                <ellipse cx="110" cy="160" rx="80" ry="12" fill="#cbd5e1"/>
+                <!-- Cuerpo Blob de Plastilina -->
+                <path d="M 40 145 C 30 110, 60 70, 110 65 C 160 70, 190 110, 180 145 C 175 160, 45 160, 40 145 Z" fill="#10b981" stroke="#047857" stroke-width="3"/>
+                <!-- Núcleo de aluminio (representación en sección) -->
+                <circle cx="110" cy="115" r="28" fill="#94a3b8" stroke="#475569" stroke-dasharray="4,3" stroke-width="2"/>
+                <text x="110" y="118" font-family="sans-serif" font-size="8" fill="#ffffff" text-anchor="middle" font-weight="bold">ALUMINIO</text>
+                <!-- Ojos alienígenas -->
+                <circle cx="90" cy="80" r="12" fill="#ffffff" stroke="#047857" stroke-width="2"/>
+                <circle cx="92" cy="80" r="5" fill="#0f172a"/>
+                <circle cx="125" cy="85" r="9" fill="#ffffff" stroke="#047857" stroke-width="2"/>
+                <circle cx="124" cy="85" r="4" fill="#0f172a"/>
+                <!-- Boca expresiva -->
+                <path d="M 95 130 Q 110 140 125 130" fill="none" stroke="#064e3b" stroke-width="4" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="puppet-content">
+              <span class="puppet-tag tag-easy">Nivel: Muy Fácil</span>
+              <h3 style="font-size:1.15rem; margin-bottom:0.5rem; color:#0f172a;">2. Monstruo Blob</h3>
+              <p style="font-size:0.88rem; color:#64748b; margin-bottom:0.75rem;">Masa blanda y viscosa que repta, se aplasta y se transforma sin volcarse.</p>
+              <ol class="step-list">
+                <li><strong>Pelota de aluminio:</strong> Arruga papel de aluminio para crear el núcleo ligero y ahorrar plastilina.</li>
+                <li><strong>Capa de plastilina:</strong> Forra el núcleo con plastilina extendida como una masa.</li>
+                <li><strong>Base ancha aplastada:</strong> Presiona contra la mesa creando forma de lágrima o flan.</li>
+                <li><strong>Piezas intercambiables:</strong> Fabrica 3 bocas sueltas para cambiarlas en cada foto.</li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- PUPPET 3: PLANTA CARNÍVORA -->
+          <div class="puppet-card">
+            <div class="puppet-illustration">
+              <!-- VECTOR PUPPET 3 -->
+              <svg viewBox="0 0 220 180" width="100%" height="160" xmlns="http://www.w3.org/2000/svg">
+                <!-- Sombra -->
+                <ellipse cx="110" cy="165" rx="55" ry="8" fill="#cbd5e1"/>
+                <!-- Maceta (Vaso reciclado) -->
+                <polygon points="75,120 145,120 135,160 85,160" fill="#ea580c" stroke="#9a3412" stroke-width="3"/>
+                <!-- Plastilina de soporte en maceta -->
+                <rect x="84" y="135" width="52" height="18" fill="#78350f" opacity="0.7"/>
+                <text x="110" y="147" font-family="sans-serif" font-size="8" fill="#ffffff" text-anchor="middle" font-weight="bold">SOPORTE</text>
+                <!-- Tallo flexible -->
+                <path d="M 110 120 Q 95 90 110 70" fill="none" stroke="#65a30d" stroke-width="7" stroke-linecap="round"/>
+                <!-- Cabeza Planta Mandíbula -->
+                <path d="M 95 65 C 80 40, 140 40, 130 65 Z" fill="#84cc16" stroke="#4d7c0f" stroke-width="2.5"/>
+                <path d="M 95 65 C 85 85, 135 85, 130 65 Z" fill="#65a30d" stroke="#4d7c0f" stroke-width="2.5"/>
+                <!-- Dientes -->
+                <polygon points="100,65 105,58 110,65 115,58 120,65" fill="#ffffff"/>
+                <!-- Hojas base -->
+                <path d="M 105 120 Q 75 110 70 125 Z" fill="#84cc16"/>
+                <path d="M 115 120 Q 145 110 150 125 Z" fill="#84cc16"/>
+              </svg>
+            </div>
+            <div class="puppet-content">
+              <span class="puppet-tag tag-medium">Nivel: Medio</span>
+              <h3 style="font-size:1.15rem; margin-bottom:0.5rem; color:#0f172a;">3. Planta en Maceta</h3>
+              <p style="font-size:0.88rem; color:#64748b; margin-bottom:0.75rem;">Para alumnos que buscan un reto: la maceta funciona como peana y trípode.</p>
+              <ol class="step-list">
+                <li><strong>Maceta anclada:</strong> Llena un tercio de un vaso de yogur con plastilina pesada.</li>
+                <li><strong>Tallo corto:</strong> Clava una pajita o alambre forrado de no más de 7 cm de altura.</li>
+                <li><strong>Mandíbulas dobles:</strong> Une dos piezas de cartulina con cinta posterior como bisagra.</li>
+                <li><strong>Prueba de mordisco:</strong> Inclina la cabeza hacia delante y verifica que no vuelque.</li>
+              </ol>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SECCIÓN 3: RESUMEN DE SESIONES -->
+      <section class="card">
+        <h2 class="section-title">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          Organización Didáctica del Curso (34 Sesiones)
+        </h2>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Bloque</th>
+                <th>Sesiones</th>
+                <th>Contenido Clave</th>
+                <th>Dinámica</th>
+                <th>Resultado de Etapa</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Bloque 1: Stop Motion</strong></td>
+                <td>Sesiones 1 a 11</td>
+                <td>Principios de animación, diseño de puppet, estabilidad, escenografía y rodaje con cebolla (onion skin).</td>
+                <td>Grupos de 3-4</td>
+                <td>Microcorto Stop Motion (10-15s)</td>
+              </tr>
+              <tr>
+                <td><strong>Bloque 2: Blender 3D</strong></td>
+                <td>Sesiones 12 a 25</td>
+                <td>Navegación 3D, modelado con primitivas (sin mallas complejas), color, cámara, luces y keyframes.</td>
+                <td>Individual</td>
+                <td>Clip 3D de personaje animado</td>
+              </tr>
+              <tr>
+                <td><strong>Bloque 3: Proyecto Híbrido</strong></td>
+                <td>Sesiones 26 a 34</td>
+                <td>Idea puente (portal/pantalla/caja), rodaje sincronizado físico-digital, sonorización y festival.</td>
+                <td>Mixto</td>
+                <td>Cortometraje mixto proyectado</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    // SCRIPT DEL MODAL DE PROTECCIÓN CON CÓDIGO
+    document.addEventListener("DOMContentLoaded", function () {
+      const modal = document.getElementById("access-modal-overlay");
+      const wrapper = document.getElementById("content-wrapper");
+      const input = document.getElementById("access-code-input");
+      const btn = document.getElementById("unlock-btn");
+      const errorMsg = document.getElementById("access-error");
+
+      // Claves válidas (en minúsculas)
+      const validCodes = ["blender2026", "animacion", "stopmotion", "docente", "1234"];
+
+      function checkCode() {
+        const val = input.value.trim().toLowerCase();
+        if (validCodes.includes(val)) {
+          // Desbloqueo exitoso
+          modal.style.transition = "opacity 0.3s ease, transform 0.3s ease";
+          modal.style.opacity = "0";
+          modal.style.transform = "scale(1.05)";
+          setTimeout(() => {
+            modal.style.display = "none";
+            wrapper.classList.add("unlocked");
+          }, 300);
+        } else {
+          // Error
+          errorMsg.style.display = "block";
+          input.style.borderColor = "#ef4444";
+          input.classList.add("shake");
+          setTimeout(() => input.classList.remove("shake"), 400);
+          input.focus();
+          input.select();
+        }
+      }
+
+      btn.addEventListener("click", checkCode);
+
+      input.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+          checkCode();
+        } else {
+          errorMsg.style.display = "none";
+          input.style.borderColor = "#e2e8f0";
+        }
+      });
+    });
+  </script>
+</body>
+</html>
